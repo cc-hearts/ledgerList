@@ -1,0 +1,14 @@
+.online-draw {
+  text-align: center;
+  canvas {
+    border: 1px solid #ddd;
+  }
+}
+
+.change-theme-color(@i,@n) {
+  @keyframes animation-theme-color {
+    from {
+      color: e('@{@{clolr}-@{i}}');
+    }
+  }
+}

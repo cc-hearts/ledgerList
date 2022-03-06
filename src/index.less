@@ -1,0 +1,49 @@
+:root {
+  --left-color: #e883a5;
+  --right-color: #e18a4e;
+}
+.heart-main {
+  position: relative;
+  background: linear-gradient(
+      217deg,
+      rgba(255, 0, 0, 0.8),
+      rgba(255, 0, 0, 0) 70.71%
+    ),
+    linear-gradient(127deg, rgba(0, 255, 0, 0.8), rgba(0, 255, 0, 0) 70.71%),
+    linear-gradient(336deg, rgba(0, 0, 255, 0.8), rgba(0, 0, 255, 0) 70.71%);
+  animation: color-change 3s linear infinite;
+  height: 100vh;
+}
+.img-main {
+  position: absolute;
+  width: 600px;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-30%);
+  object-fit: contain;
+}
+.custom-shape-divider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.custom-shape-divider svg {
+  position: relative;
+  display: block;
+  width: calc(131% + 1.3px);
+  height: 290px;
+}
+
+.shape-fill {
+  fill: #ffffff !important;
+}
+
+@keyframes color-change {
+  from {
+    filter: hue-rotate(360deg);
+  }
+}
