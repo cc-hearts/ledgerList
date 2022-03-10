@@ -23,7 +23,6 @@ function getCanvasElement() {
     ctx = canvas.getContext('2d');
   }
 }
-//TODO: canvas 实现画板功能
 function drawCanvas(x?: number, y?: number): void {
   if (ctx) {
     ctx.restore();

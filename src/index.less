@@ -2,7 +2,18 @@
   --left-color: #e883a5;
   --right-color: #e18a4e;
 }
-.heart-main {
+
+.img-main {
+  position: absolute;
+  width: 600px;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-30%);
+  object-fit: contain;
+}
+.custom-shape-divider {
+  width: 100%;
+  overflow: hidden;
   position: relative;
   background: linear-gradient(
       217deg,
@@ -14,22 +25,6 @@
   animation: color-change 3s linear infinite;
   height: 100vh;
 }
-.img-main {
-  position: absolute;
-  width: 600px;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-30%);
-  object-fit: contain;
-}
-.custom-shape-divider {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  overflow: hidden;
-  line-height: 0;
-}
 
 .custom-shape-divider svg {
   position: relative;
@@ -39,7 +34,7 @@
 }
 
 .shape-fill {
-  fill: #ffffff !important;
+  fill: #fff;
 }
 
 @keyframes color-change {
