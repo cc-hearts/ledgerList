@@ -17,12 +17,7 @@ export default function IndexPage() {
           ></path>
         </svg>
       </div>
-      <img
-        className={Less['img-main']}
-        draggable={false}
-        src={MainTitle}
-        alt=""
-      />
+      <img className={Less['img-main']} draggable={false} src={MainTitle} />
     </>
   );
 }

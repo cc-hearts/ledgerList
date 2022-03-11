@@ -3,7 +3,7 @@
  * @description 图片文字滚动
  * @Date 2022-03-10
  */
-
+//TODO:按钮控制 开始 以及关闭功能
 import React, { useRef, useEffect } from 'react';
 interface props {
   listImg: Array<React.ReactElement>;
@@ -45,23 +45,25 @@ function addsSrollEvents<T extends React.MutableRefObject<any>>(
   }, 100);
 }
 // 初始化计算滚动的宽度
-function initScrollWidth<T extends React.MutableRefObject<any>>(dom: T): void {
+function initScrollWidth<T extends React.MutableRefObject<HTMLElement | null>>(
+  dom: T,
+): void {
   if (dom === null) return;
-  // parentWidth = Number.parseFloat(dom.current.offsetWidth);
-  for (let i = 0; i < dom.current.children.length; i++) {
-    const childrenWidth: number = Number.parseFloat(
-      dom.current.children[i].offsetWidth,
-    );
-    // 百分比以自身为中心
-    const childrenLeft = Number.parseFloat(dom.current.children[i].offsetLeft);
-    const childRight =
-      Number.parseFloat(dom.current.scrollWidth) -
-      Number.parseFloat(dom.current.children[i].offsetLeft) -
-      childrenWidth;
-    initWidth.push(
-      (((childrenLeft + childrenWidth) * 100) / childrenWidth) * -1,
-    );
-    parentWidth.push((childRight * 100) / childrenWidth);
+  if (dom && dom.current) {
+    for (let i = 0; i < dom.current.children.length; i++) {
+      const childrenWidth: number = (dom.current.children[i] as HTMLElement)
+        .offsetWidth;
+      // 百分比以自身为中心
+      const childrenLeft = (dom.current.children[i] as HTMLElement).offsetLeft;
+      const childRight =
+        dom.current.scrollWidth -
+        (dom.current.children[i] as HTMLElement).offsetLeft -
+        childrenWidth;
+      initWidth.push(
+        (((childrenLeft + childrenWidth) * 100) / childrenWidth) * -1,
+      );
+      parentWidth.push((childRight * 100) / childrenWidth);
+    }
   }
 }
 function clearScrollEvent<T>(dom: T): void {}
@@ -78,7 +80,7 @@ const SrcollComponent: React.FC<props> = function (props) {
   return (
     <>
       <ul
-        className="flex flex-shrink overflow-hidden text-align-center width-full flex-no-warp h-100"
+        className="flex flex-no-warp overflow-hidden text-align-center width-full  height-full"
         ref={refContainer}
       >
         {listImg.map((x, index) => {
