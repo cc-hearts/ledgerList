@@ -8,6 +8,7 @@ export default defineConfig({
     { path: '/', component: '@/index' },
     { path: '/canvas', component: '@/pages/canvas' },
     { path: '/scroll', component: '@/pages/scroll' },
+    { path: '/scrollUi', component: '@/pages/scroll/scroll.tsx' },
   ],
   fastRefresh: {},
 });

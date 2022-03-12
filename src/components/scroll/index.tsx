@@ -4,6 +4,8 @@
  * @Date 2022-03-10
  */
 //TODO:按钮控制 开始 以及关闭功能
+// ts 能否推断出子元素的集合的类型
+// 考虑拆分li组件完成 简洁的代码
 import React, { useRef, useEffect } from 'react';
 interface props {
   listImg: Array<React.ReactElement>;
