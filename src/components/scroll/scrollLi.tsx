@@ -1,10 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
-interface props {
+interface props extends scroll {
   dom: Element | JSX.Element;
   width: number;
-  speed: number;
-  random: number;
-  timer: number;
 }
 const ScrollLi: React.FC<props> = function (props) {
   const refs = useRef<HTMLLIElement | null>(null);

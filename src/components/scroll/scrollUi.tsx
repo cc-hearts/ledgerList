@@ -1,10 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import ScrollLi from '../../components/scroll/ScrollLi';
-interface props {
+interface props extends scroll {
   dom(): Element[] | JSX.Element[];
-  speed: number;
-  random: number;
-  timer: number;
 }
 
 const ScrollUi: React.FC<props> = function (props) {
