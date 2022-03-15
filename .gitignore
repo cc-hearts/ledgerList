@@ -12,6 +12,7 @@
 
 # misc
 .DS_Store
+.vscode
 
 # umi
 /src/.umi

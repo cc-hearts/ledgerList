@@ -14,7 +14,7 @@ const ScrollUi: React.FC<props> = function (props) {
   }, []);
   return (
     <ul
-      className="flex flex-no-warp overflow-hidden text-align-center width-full  height-full"
+      className="flex flex-no-warp  text-align-center width-full  height-full"
       ref={ref}
     >
       {props.dom().map((x, index) => {
@@ -32,5 +32,4 @@ const ScrollUi: React.FC<props> = function (props) {
     </ul>
   );
 };
-
 export default ScrollUi;

@@ -38,7 +38,7 @@ const ScrollLi: React.FC<props> = function (props) {
       className="flex-1"
       style={{ transform: `translateX(${transition}%) translateZ(0)` }}
     >
-      {props.dom}
+      <div>{props.dom}</div>
     </li>
   );
 };
