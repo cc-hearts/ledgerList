@@ -49,7 +49,7 @@ const SrcollComponent: React.FC<{}> = function () {
   return (
     <>
       <div className="height-100">
-        <ScrollComponent listImg={list} speed={1000} />
+        <ScrollComponent listImg={list} speed={0.3} />
       </div>
     </>
   );

@@ -8,7 +8,6 @@ const Todo: React.FC = function () {
   const [num, setNum] = useState<number>(0);
   const [context, setContext] = useState<string | undefined>(undefined);
   const [todoList, disPatchList] = useReducer(reducer, null, initReducer);
-  console.log('a');
 
   return (
     <div className="flex">

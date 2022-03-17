@@ -6,6 +6,8 @@
 //TODO:按钮控制 开始 以及关闭功能
 // ts 能否推断出子元素的集合的类型
 // 考虑拆分li组件完成 简洁的代码
+
+// 重构 掉帧
 import React, { useRef, useEffect } from 'react';
 interface props {
   listImg: Array<React.ReactElement>;
@@ -20,31 +22,33 @@ function initialString(num?: number): string {
 }
 const initWidth: Array<number> = [];
 let parentWidth: Array<number> = [];
+// speed决定速度
+// const randomNumber = Math.random() * 900 + 100;
 function addsSrollEvents<T extends React.MutableRefObject<any>>(
   dom: T,
   speed: number,
 ): void {
   if (dom === null) return;
   // 给每个元素添加滚动事件
-  setInterval(() => {
-    // speed决定速度
-    const random = (Math.random() * 900 + 100) / speed;
-    for (let i = 0; i < dom.current.children.length; i++) {
-      if (dom.current.children[i].style.transform === '') {
-        dom.current.children[i].style.transform = initialString();
-      } else {
-        const string = dom.current.children[i].style.transform;
-        const reg = /X\(\s*(\-*\d*\.*\d*)%/;
-        if (reg.test(string)) {
-          const regex = RegExp.$1;
-          const num = Number.parseFloat(regex) - random;
-          dom.current.children[i].style.transform = initialString(
-            num < initWidth[i] ? parentWidth[i] : num,
-          );
-        }
+  const random = speed;
+  for (let i = 0; i < dom.current.children.length; i++) {
+    if (dom.current.children[i].style.transform === '') {
+      dom.current.children[i].style.transform = initialString();
+    } else {
+      const string = dom.current.children[i].style.transform;
+      const reg = /X\(\s*(\-*\d*\.*\d*)%/;
+      if (reg.test(string)) {
+        const regex = RegExp.$1;
+        const num = Number.parseFloat(regex) - random;
+        dom.current.children[i].style.transform = initialString(
+          num < initWidth[i] ? parentWidth[i] : num,
+        );
       }
     }
-  }, 100);
+  }
+  requestAnimationFrame(() => {
+    addsSrollEvents(dom, speed);
+  });
 }
 // 初始化计算滚动的宽度
 function initScrollWidth<T extends React.MutableRefObject<HTMLElement | null>>(
