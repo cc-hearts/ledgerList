@@ -14,11 +14,7 @@ const TodoLi: React.FC<props> = function (props) {
         props.onClick(e);
       }}
     >
-      <input
-        type="radio"
-        checked={props.val.isFinish}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {}}
-      />
+      <input type="radio" checked={props.val.isFinish} onChange={(e: React.ChangeEvent<HTMLInputElement>) => {}} />
       <span>{props.val.name}</span>
     </li>
   );

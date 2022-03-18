@@ -16,11 +16,7 @@ const TodoUi: React.FC<props> = function (props) {
               <TodoLi
                 val={val}
                 key={index + '_' + val.name}
-                onClick={(
-                  e:
-                    | React.ChangeEvent<HTMLInputElement>
-                    | React.MouseEvent<HTMLElement>,
-                ) => {
+                onClick={(e: React.ChangeEvent<HTMLInputElement> | React.MouseEvent<HTMLElement>) => {
                   props.disPatch({
                     type: val.isFinish ? rediEmum.UNCHECKED : rediEmum.CHECKED,
                     index,

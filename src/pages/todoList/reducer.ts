@@ -6,10 +6,7 @@ export enum rediEmum {
   REMOVELIST,
 }
 import type { todoList, todoListAction } from '../../types/todoList';
-export function reducer(
-  state: Array<todoList> | null,
-  action: todoListAction,
-): Array<todoList> | null {
+export function reducer(state: Array<todoList> | null, action: todoListAction): Array<todoList> | null {
   if (!state) return null;
   switch (action.type) {
     case rediEmum.CHECKED: {
