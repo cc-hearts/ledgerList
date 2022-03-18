@@ -4,6 +4,8 @@
   --mask-height: var(--mask);
   --mask-border: var(--mask);
 }
+@primary: #3178c6;
+@bgcolor: #fff;
 @keyframes change-mask {
   0% {
     transform: rotate(-90deg);
@@ -41,11 +43,11 @@
 .loading-main {
   height: 100vh;
   position: relative;
-  background-color: #fff;
+  background-color: @bgcolor;
   .mask-change {
     left: 65%;
     top: 53%;
-    border: 5px solid #3178c6;
+    border: 5px solid @primary;
     position: absolute;
     border-radius: 25px;
     &:nth-of-type(3) {
@@ -64,7 +66,7 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    border: 25px solid #3178c6;
+    border: 25px solid @primary;
     border-right-color: transparent;
     border-radius: 25px;
   }
