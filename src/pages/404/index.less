@@ -1,0 +1,32 @@
+@color-primary: rgb(14, 30, 37);
+@border-color: #eee;
+.error {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  & > span {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    display: flex;
+    transform: translate(-50%, -50%);
+
+    height: 100px;
+    align-items: center;
+    color: @color-primary;
+    &:nth-child(1) {
+      border: 1px solid @border-color;
+    }
+    &:nth-child(2) {
+      &::before {
+        content: 'Error';
+        position: relative;
+      }
+      &::after {
+        content: 'Page Not Found';
+        position: relative;
+        left: 50%;
+      }
+    }
+  }
+}
