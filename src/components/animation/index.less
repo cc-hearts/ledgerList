@@ -1,0 +1,27 @@
+@border-color: #1a2d49;
+.animation {
+  & > span:nth-last-of-type(1) {
+    &::after {
+      content: '';
+      border: 1px solid @border-color;
+    }
+  }
+}
+
+@keyframes cursor {
+  0% {
+    border: 1px solid @border-color;
+  }
+
+  70% {
+    border: 1px solid transparent;
+  }
+}
+.cursor {
+  & > span:nth-last-of-type(1) {
+    &::after {
+      content: '';
+      animation: cursor 1s linear 2;
+    }
+  }
+}

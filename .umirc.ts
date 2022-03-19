@@ -11,6 +11,7 @@ export default defineConfig({
     { path: '/scrollUi', component: '@/pages/scroll/scroll.tsx' },
     { path: '/todo', component: '@/pages/todoList' },
     { path: '/loading', component: '@/pages/loading' },
+    { path: '/animation', component: '@/pages/animation' },
     { path: '*', component: '@/pages/404' },
   ],
   fastRefresh: {},
