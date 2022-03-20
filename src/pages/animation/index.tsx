@@ -6,7 +6,7 @@ function AnimationTest() {
   return (
     <>
       <div className={Less['animation']}>
-        <div className="shadow-2xl p-8	">
+        <div className="shadow-2xl p-8 max-w-md">
           <Animation content={content} />
         </div>
       </div>

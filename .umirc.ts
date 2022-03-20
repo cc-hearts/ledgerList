@@ -12,6 +12,8 @@ export default defineConfig({
     { path: '/todo', component: '@/pages/todoList' },
     { path: '/loading', component: '@/pages/loading' },
     { path: '/animation', component: '@/pages/animation' },
+    { path: '/card', component: '@/pages/card' },
+    { path: '/code', component: '@/pages/code' },
     { path: '*', component: '@/pages/404' },
   ],
   fastRefresh: {},
