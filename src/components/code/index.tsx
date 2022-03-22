@@ -122,11 +122,9 @@ function formatReactNode(node: React.ReactNode): context | context[] {
   }
 }
 const Code: React.FC<props> = function (props) {
-  // jsx会去除换行 要对props的children进行预处理
   return (
     <>
       <pre>
-        <code>{props.children}</code>
         <Animation content={factoryTag(formatReactNode(props.children))} />
       </pre>
     </>
