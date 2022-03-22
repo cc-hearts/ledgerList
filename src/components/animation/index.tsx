@@ -5,11 +5,12 @@ interface props {
 }
 let timer: NodeJS.Timer;
 type setType<T> = React.Dispatch<React.SetStateAction<T>>;
-function animations(text: string[], setText: setType<Array<string>>, setIsFinish: setType<boolean>, totalLength: string, dialy: number = 100) {
+function animations(text: string[], setText: setType<Array<string>>, setIsFinish: setType<boolean>, totalLength: string, dialy: number = 6) {
   if (text.length < totalLength.length) {
     timer = setTimeout(() => {
       setText([...text, totalLength[text.length]]);
-    }, dialy);
+      // 延迟控制速度
+    }, (1000 / 60) * dialy);
   } else {
     clearTimeout(timer);
     setIsFinish(true);
@@ -18,12 +19,11 @@ function animations(text: string[], setText: setType<Array<string>>, setIsFinish
 const AnimationText: React.FC<props> = function (props) {
   const [text, setText] = useState<Array<string>>([]);
   const [isFinish, setIsFinish] = useState<boolean>(false);
-  const [timer, setTimer] = useState<number>(0);
   useEffect(() => {
     if (isFinish) {
       return;
     }
-    requestAnimationFrame(() => {
+    requestAnimationFrame((tempSize) => {
       animations(text, setText, setIsFinish, props.content);
     });
   }, [text, timer]);
