@@ -30,7 +30,7 @@ const Scroll: React.FC<props> = function (props) {
 
   return (
     <div>
-      <ScrollUi dom={callback} speed={60} />
+      <ScrollUi dom={callback} speed={60} random={random} timer={timer} />
     </div>
   );
 };

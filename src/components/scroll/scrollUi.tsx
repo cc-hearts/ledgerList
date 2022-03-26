@@ -15,7 +15,7 @@ const ScrollUi: React.FC<props> = function (props) {
   return (
     <ul className="flex flex-no-warp position-relative  text-align-center width-full  height-full" ref={ref}>
       {props.dom().map((x, index) => {
-        return <ScrollLi dom={x} key={index} width={width} speed={props.speed} />;
+        return <ScrollLi dom={x} key={index} width={width} speed={props.speed} random={props.random} timer={props.timer} />;
       })}
     </ul>
   );
