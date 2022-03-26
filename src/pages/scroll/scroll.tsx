@@ -18,55 +18,19 @@ const Scroll: React.FC<props> = function (props) {
   }, []);
   const callback = useCallback(() => {
     const list: Array<React.ReactElement> = [
-      <div
-        className={
-          'height-full width-400 margin-0-16 ' + Less['background-color-1']
-        }
-      >
-        1
-      </div>,
-      <div
-        className={
-          'height-full width-400 margin-0-16 ' + Less['background-color-2']
-        }
-      >
-        2
-      </div>,
-      <div
-        className={
-          'height-full width-400 margin-0-16 ' + Less['background-color-3']
-        }
-      >
-        3
-      </div>,
-      <div
-        className={
-          'height-full width-400 margin-0-16 ' + Less['background-color-4']
-        }
-      >
-        4
-      </div>,
-      <div
-        className={
-          'height-full width-400 margin-0-16 ' + Less['background-color-5']
-        }
-      >
-        5
-      </div>,
-      <div
-        className={
-          'height-full width-400 margin-0-16 ' + Less['background-color-6']
-        }
-      >
-        6
-      </div>,
+      <div className={'height-full width-400 margin-0-16 ' + Less['background-color-1']}>1</div>,
+      <div className={'height-full width-400 margin-0-16 ' + Less['background-color-2']}>2</div>,
+      <div className={'height-full width-400 margin-0-16 ' + Less['background-color-3']}>3</div>,
+      <div className={'height-full width-400 margin-0-16 ' + Less['background-color-4']}>4</div>,
+      <div className={'height-full width-400 margin-0-16 ' + Less['background-color-5']}>5</div>,
+      <div className={'height-full width-400 margin-0-16 ' + Less['background-color-6']}>6</div>,
     ];
     return list;
   }, []);
 
   return (
     <div>
-      <ScrollUi dom={callback} speed={60} random={random} timer={timer} />
+      <ScrollUi dom={callback} speed={60} />
     </div>
   );
 };

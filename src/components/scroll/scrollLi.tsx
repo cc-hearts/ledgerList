@@ -12,32 +12,26 @@ const ScrollLi: React.FC<props> = function (props) {
   useEffect(() => {
     if (refs.current) {
       setChildrenLeft(refs.current.offsetLeft);
-      setchidrenRights(
-        props.width - refs.current.offsetLeft - refs.current.offsetWidth,
-      );
+      setchidrenRights(props.width - refs.current.offsetLeft - refs.current.offsetWidth);
       setWidth(refs.current.offsetWidth);
     }
   }, [props.width]);
   useEffect(() => {
-    const timer = setInterval(() => {
+    const timer = requestAnimationFrame(() => {
       let number = 0;
       if (-(1 + childrenLeft / width) * 100 > transition) {
         number = (chidrenRights / width) * 100;
       } else {
         number = transition;
-        number -= props.random / 30;
+        number -= props.speed / width;
       }
       setTransition(number);
-    }, props.timer);
-    return () => clearInterval(timer);
-  }, [transition, props.speed, props.random, props.timer]);
+    });
+    return () => cancelAnimationFrame(timer);
+  }, [transition, props.speed]);
 
   return (
-    <li
-      ref={refs}
-      className="flex-1"
-      style={{ transform: `translateX(${transition}%) translateZ(0)` }}
-    >
+    <li ref={refs} className="flex-1" style={{ transform: `translateX(${transition}%) translateZ(0)` }}>
       <div>{props.dom}</div>
     </li>
   );
