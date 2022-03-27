@@ -14,6 +14,7 @@ export default defineConfig({
     { path: '/animation', component: '@/pages/animation' },
     { path: '/card', component: '@/pages/card' },
     { path: '/code', component: '@/pages/code' },
+    { path: '/theme', component: '@/pages/theme' },
     { path: '*', component: '@/pages/404' },
   ],
   fastRefresh: {},
