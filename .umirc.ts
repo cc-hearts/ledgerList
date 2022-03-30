@@ -14,6 +14,7 @@ export default defineConfig({
     { path: '/animation', component: '@/pages/animation' },
     { path: '/card', component: '@/pages/card' },
     { path: '/code', component: '@/pages/code' },
+    { path: '/message', component: '@/lib/message' },
     { path: '/theme', component: '@/pages/theme' },
     { path: '*', component: '@/pages/404' },
   ],
