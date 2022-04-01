@@ -25,11 +25,10 @@
   border-radius: 10px;
   background-color: @message-color;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
-  position: fixed;
+  position: relative;
+  top: 0;
   right: 5%;
-  top: 20px;
   opacity: 0.9;
-  //transform: translateX(-50%);
   display: flex;
   font-weight: 500;
   animation: fade-in 0.38s ease-in-out;
@@ -64,4 +63,15 @@
     animation: width-change 1.5s ease-in-out;
     background-color: @step-color;
   }
+}
+
+.message-card-position {
+  position: relative;
+  margin: 10px 0;
+}
+
+#_message__card {
+  position: absolute;
+  top: 0;
+  right: 0;
 }

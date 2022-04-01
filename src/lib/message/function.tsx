@@ -37,7 +37,7 @@ const MessageFunction: React.FC<props> = function (props) {
         }}
         className={Less['message-card']}
       >
-        <span className="iconfont icon-zhengque"></span>
+        <span className="iconfont icon-zhengque" />
         <div>
           <span>成功</span>
           <span>{props.message || '操作成功'}</span>
