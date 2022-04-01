@@ -1,4 +1,5 @@
 import { defineConfig } from 'umi';
+
 export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
@@ -15,6 +16,7 @@ export default defineConfig({
     { path: '/card', component: '@/pages/card' },
     { path: '/code', component: '@/pages/code' },
     { path: '/message', component: '@/lib/message' },
+    { path: '/test', component: '@/lib/message/test/index.tsx' },
     { path: '/theme', component: '@/pages/theme' },
     { path: '*', component: '@/pages/404' },
   ],

@@ -6,20 +6,16 @@
 
 import Less from './index.less';
 import '../../assets/font/iconfont.css';
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useState } from 'react';
 import './animation.less';
+
 interface props {
   message: string;
 }
+
 const Message: React.FC<props> = function (props) {
   const [show, setShow] = useState(true);
   const ref = useRef<HTMLDivElement | null>(null);
-  // 如何改进 支持函数试调用和自定义调用
-  // useEffect(() => {
-  //   if (ref.current) {
-  //     document.body.appendChild(ref.current)
-  //   }
-  // })
   return (
     <>
       {show ? (
