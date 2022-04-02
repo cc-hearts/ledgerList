@@ -1,6 +1,6 @@
 @font-face {
   font-family: "iconfont"; /* Project id  */
-  src: url('iconfont.ttf?t=1648649442940') format('truetype');
+  src: url('iconfont.ttf?t=1648879157394') format('truetype');
 }
 
 .iconfont {
@@ -11,7 +11,19 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-zhengque:before {
+.icon-info:before {
+  content: "\e627";
+}
+
+.icon-danger:before {
+  content: "\f0158";
+}
+
+.icon-warning:before {
+  content: "\e620";
+}
+
+.icon-success:before {
   content: "\e8ad";
 }
 

@@ -8,13 +8,24 @@ import Less from './index.less';
 import '../../assets/font/iconfont.css';
 import { useRef } from 'react';
 import './animation.less';
+import type { message } from './index.d';
 
+enum MessageType {
+  danger = 'DANGER',
+  success = 'SUCCESS',
+  info = 'INFO',
+  warning = 'WARNING',
+}
 interface props {
   message: string;
+  type: message.MessageType;
   onclose?: () => void;
 }
 
 const MessageFunction: React.FC<props> = function (props) {
+  console.log(props.type);
+
+  const type = MessageType[props.type];
   const ref = useRef<HTMLDivElement | null>(null);
   return (
     <>
@@ -35,11 +46,11 @@ const MessageFunction: React.FC<props> = function (props) {
             }
           }
         }}
-        className={Less['message-card']}
+        className={Less['message-card'] + ' ' + Less['message-' + props.type]}
       >
-        <span className="iconfont icon-zhengque" />
+        <span className={'iconfont icon-' + props.type} />
         <div>
-          <span>成功</span>
+          <span>{type}</span>
           <span>{props.message || '操作成功'}</span>
         </div>
       </div>

@@ -1,13 +1,20 @@
 import ReactDOM from 'react-dom';
 import MessageFunction from '@/lib/message/function';
 import Less from './index.less';
+import type { message } from './index.d';
 interface Props {
   message: string;
-  type: 'error' | 'success' | 'info';
+  type: message.MessageType;
 }
-
-export const useMessage = function (props: Props) {
-  const { message = 'default', type } = props;
+interface useMessage {
+  (props: Props): void;
+  success: (message: string) => void;
+  warning: (message: string) => void;
+  info: (message: string) => void;
+  danger: (message: string) => void;
+}
+export const useMessage: useMessage = function (props: Props) {
+  const { message = 'default', type = 'success' } = props;
   // 判断body下面是否存在divTag
   var root = document.querySelector('div#_message__card');
   if (!root || root.parentNode !== document.body) {
@@ -32,7 +39,8 @@ export const useMessage = function (props: Props) {
   ReactDOM.render(
     <MessageFunction
       // key={new Date().getTime()}
-      message={props.message}
+      message={message}
+      type={type}
       onclose={() => {
         if (divTag) {
           ReactDOM.unmountComponentAtNode(divTag);
@@ -45,4 +53,29 @@ export const useMessage = function (props: Props) {
     />,
     divTag,
   );
+};
+
+useMessage.success = function (message: string) {
+  useMessage({
+    message,
+    type: 'success',
+  });
+};
+useMessage.warning = function (message: string) {
+  useMessage({
+    message,
+    type: 'warning',
+  });
+};
+useMessage.info = function (message: string) {
+  useMessage({
+    message,
+    type: 'info',
+  });
+};
+useMessage.danger = function (message: string) {
+  useMessage({
+    message,
+    type: 'danger',
+  });
 };
