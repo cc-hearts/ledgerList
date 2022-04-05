@@ -43,8 +43,9 @@ export const useMessage: useMessage = function (props: Props) {
       type={type}
       onclose={() => {
         if (divTag) {
+          // unmountComponentAtNode用于移除组件并且事件监听器和state一起移除 不能用于移除dom元素
           ReactDOM.unmountComponentAtNode(divTag);
-          root ? root.removeChild(divTag) : null;
+          // root ? root.removeChild(divTag) : null;
           if (root && !root?.hasChildNodes()) {
             document.body.removeChild(root);
           }
@@ -53,6 +54,8 @@ export const useMessage: useMessage = function (props: Props) {
     />,
     divTag,
   );
+  // 验证首次调用是否将子节点全部替换
+  // divTag.appendChild(document.createElement('div'))
 };
 
 useMessage.success = function (message: string) {
