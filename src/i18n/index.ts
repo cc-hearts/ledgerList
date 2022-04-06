@@ -11,7 +11,8 @@ i18n.use(initReactI18next).init({
     'en-US': en_US,
     'zh-CN': zh_CN,
   },
-  fallbackLng: 'en-US',
+  fallbackLng: 'en-US', // 如果当前切换的语言没有对应的翻译则是当前使用的这个语言
+  //  lng: 'zh-TW',             //预定义语言
   interpolation: {
     escapeValue: false, // react already safes from xss => https://www.i18next.com/translation-function/interpolation#unescape
   },
