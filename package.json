@@ -28,7 +28,8 @@
     "react-dom": "17.x",
     "react-i18next": "^11.16.2",
     "styled-components": "^5.3.6",
-    "umi": "^3.5.21"
+    "umi": "^3.5.21",
+    "yorkie": "^2.0.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.0",
