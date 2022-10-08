@@ -4,7 +4,8 @@ import { useRef } from 'react';
 import { useState } from 'react';
 const Tab = styled.div`
   color: ${primaryColor};
-  padding: 0 1.5rem;
+  padding: 0 2rem;
+  margin: 1rem 0;
   & span {
     margin: 0 0.8rem 0 0;
   }

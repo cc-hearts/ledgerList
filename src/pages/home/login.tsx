@@ -1,5 +1,6 @@
 import { UnlockOutline, UserContactOutline } from 'antd-mobile-icons';
 import { Input } from 'antd-mobile/es/components/input/input';
+import { Button } from '@/components/antd-mobile/index';
 import { useRef } from 'react';
 import styled from 'styled-components';
 const List = styled.div`
@@ -18,6 +19,7 @@ const ListItem = styled.div`
   }
   & input {
     border: none;
+    width: 100%;
     background: transparent;
     padding: 1rem 0;
     &:focus-visible {
@@ -28,11 +30,13 @@ const ListItem = styled.div`
 const Login = () => {
   const formRef = useRef([
     {
+      name: 'username',
       prefixIcon: UserContactOutline,
       components: Input,
       placeholder: '请输入账号',
     },
     {
+      name: 'password',
       prefixIcon: UnlockOutline,
       components: Input,
       type: 'password',
@@ -45,12 +49,15 @@ const Login = () => {
       {formRef.current.map((val) => {
         const { prefixIcon: Icon, components: Components } = val;
         return (
-          <ListItem>
+          <ListItem key={val.name}>
             <Icon fontSize={24} />
             <Components placeholder={val.placeholder || ''} type={val.type || 'text'} />
           </ListItem>
         );
       })}
+      <Button block color="primary" fill="solid">
+        确定
+      </Button>
     </List>
   );
 };
