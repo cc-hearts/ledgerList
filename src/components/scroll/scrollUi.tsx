@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
-import ScrollLi from '../../components/scroll/ScrollLi';
+import ScrollLi from './scrollLi.tsx';
 interface props extends scroll {
   dom(): Element[] | JSX.Element[];
 }

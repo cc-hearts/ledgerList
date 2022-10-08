@@ -1,41 +1,18 @@
-import React, { useState } from 'react';
-import './assets/style/style.css';
-import { ConfigProvider } from 'antd';
-import enUS from 'antd/lib/locale/en_US';
-import zhCN from 'antd/lib/locale/zh_CN';
-import { useTranslation } from 'react-i18next';
-import type { TFunction } from 'react-i18next';
-import { LANGUAGE } from './i18n/index';
+import React from 'react';
+import './main.less';
+import styled from 'styled-components';
+
+const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+  overflow: scroll;
+  background: linear-gradient(210deg, #6fb9f8, #3daaf85e, #49d3fc1a, #3fd3ff00);
+`;
+
 interface props {}
-interface language {
-  (): void;
-}
-
-export const MyContext = React.createContext<language | null>(null); // 创建一个context
-
-export const IContext = React.createContext<TFunction<'translation', undefined>>(() => {});
 
 const App: React.FC<props> = function (props) {
-  const [locate, setLocate] = useState(enUS);
-  const { t, i18n } = useTranslation();
-
-  return (
-    <ConfigProvider locale={locate}>
-      <MyContext.Provider
-        value={() => {
-          if (locate.locale === 'zh-cn') {
-            setLocate(enUS);
-            i18n.changeLanguage(LANGUAGE.enUS);
-          } else {
-            setLocate(zhCN);
-            i18n.changeLanguage(LANGUAGE.zhCN);
-          }
-        }}
-      >
-        <IContext.Provider value={t}>{props.children}</IContext.Provider>
-      </MyContext.Provider>
-    </ConfigProvider>
-  );
+  return <Container>{props.children}</Container>;
 };
 
 export default App;

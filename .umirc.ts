@@ -10,7 +10,7 @@ export default defineConfig({
       component: '@/main.tsx',
       routes: [
         { path: '/', redirect: '/home' },
-        { path: '/home', component: '@/index.tsx' },
+        { path: '/home', component: '@/pages/home' },
         { path: '/canvas', component: '@/pages/canvas' },
         { path: '/scroll', component: '@/pages/scroll' },
         { path: '/scrollUi', component: '@/pages/scroll/scroll.tsx' },
@@ -30,5 +30,5 @@ export default defineConfig({
     { path: '*', component: '@/pages/404' },
   ],
   fastRefresh: {},
-  extraPostCSSPlugins: [require('autoprefixer'), require('tailwindcss')],
+  extraPostCSSPlugins: [require('autoprefixer')],
 });
