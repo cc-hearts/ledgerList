@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { primaryColor } from '@/constants/css';
-import { useRef } from 'react';
+import { useCallback, useRef } from 'react';
 import { useState } from 'react';
 const Tab = styled.div`
   color: ${primaryColor};
@@ -23,20 +23,27 @@ const Tab = styled.div`
     }
   }
 `;
-export default () => {
+interface Props {
+  changeActive: (status: boolean) => void;
+}
+const TabComponent: React.FC<Props> = ({ changeActive }) => {
   const tabList = useRef([
     { title: '登陆', value: 'login' },
     { title: '注册', value: 'register' },
   ]);
   const [activeTab, setActiveTab] = useState<string>('login');
-  function toggleActive(value: string) {
-    setActiveTab(() => value);
-  }
+  const toggleActive = useCallback(
+    (value: string) => {
+      setActiveTab(() => value);
+      changeActive(value === 'login');
+    },
+    [changeActive],
+  );
   return (
     <Tab>
       {tabList.current.map((tabs) => {
         return (
-          <span key={tabs.value} className={activeTab === tabs.value ? 'tab-active' : ''} onClick={(e) => toggleActive(tabs.value)}>
+          <span key={tabs.value} className={activeTab === tabs.value ? 'tab-active' : ''} onClick={() => toggleActive(tabs.value)}>
             {tabs.title}
           </span>
         );
@@ -44,3 +51,4 @@ export default () => {
     </Tab>
   );
 };
+export default TabComponent;

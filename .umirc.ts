@@ -9,8 +9,9 @@ export default defineConfig({
       path: '/',
       component: '@/main.tsx',
       routes: [
-        { path: '/', redirect: '/home' },
-        { path: '/home', component: '@/pages/home' },
+        { path: '/', redirect: '/login' },
+        { path: '/login', component: '@/pages/home' },
+        { path: '/test', component: '@/components/verification/verification' },
         { path: '/canvas', component: '@/pages/canvas' },
         { path: '/scroll', component: '@/pages/scroll' },
         { path: '/scrollUi', component: '@/pages/scroll/scroll.tsx' },

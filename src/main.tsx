@@ -2,11 +2,7 @@ import React from 'react';
 import './main.less';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  width: 100vw;
-  overflow: scroll;
-  background: linear-gradient(210deg, #6fb9f8, #3daaf85e, #49d3fc1a, #3fd3ff00);
-`;
+const Container = styled.div``;
 
 interface props {}
 
