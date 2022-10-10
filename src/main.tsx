@@ -4,7 +4,9 @@ import styled from 'styled-components';
 
 const Container = styled.div``;
 
-interface props {}
+interface props {
+  children?: React.ReactNode;
+}
 
 const App: React.FC<props> = function (props) {
   return <Container>{props.children}</Container>;

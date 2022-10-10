@@ -5,6 +5,7 @@ import Verification from '@/components/verification/verification';
 import type { SVGProps } from 'react';
 import Tab from './login.title';
 import styled from 'styled-components';
+import useFormData from './useForm';
 const List = styled.div`
   width: 100%;
   padding: 0 2rem;
@@ -29,6 +30,13 @@ const ListItem = styled.div`
     }
   }
 `;
+
+interface loginForm {
+  username: string;
+  password: string;
+  verification: string;
+  [props: string]: unknown;
+}
 interface FormList {
   name: string;
   prefixIcon: React.FC<SVGProps<SVGSVGElement>>;
@@ -36,14 +44,17 @@ interface FormList {
   placeholder?: string;
   type?: string;
   suffixComponent?: React.FC<any>;
+  field: string;
 }
 const Login = () => {
   const [, setActiveLogin] = useState(true);
+  const { data, setFieldValue, clearFormData } = useFormData<loginForm>({ username: '', password: '', verification: '' });
   const formRef = useRef<Array<FormList>>([
     {
       name: 'username',
       prefixIcon: UserContactOutline,
       components: Input,
+      field: 'username',
       placeholder: '请输入账号',
     },
     {
@@ -51,42 +62,57 @@ const Login = () => {
       prefixIcon: UnlockOutline,
       components: Input,
       type: 'password',
+      field: 'password',
       placeholder: '请输入密码',
     },
   ]);
-  const changeActiveLogin = useCallback((status: boolean) => {
-    if (!status && formRef.current.length === 2) {
-      // 改为注册状态
-      formRef.current.push({
-        name: 'verification',
-        prefixIcon: LinkOutline,
-        suffixComponent: Verification,
-        components: Input,
-        placeholder: '请输入验证码',
-      });
-    } else if (status && formRef.current.length > 2) {
-      formRef.current = formRef.current.slice(0, -1);
-    }
-    setActiveLogin(() => status);
-  }, []);
+  const changeActiveLogin = useCallback(
+    (status: boolean) => {
+      if (!status && formRef.current.length === 2) {
+        // 改为注册状态
+        formRef.current.push({
+          name: 'verification',
+          prefixIcon: LinkOutline,
+          field: 'verification',
+          suffixComponent: Verification,
+          components: Input,
+          placeholder: '请输入验证码',
+        });
+        clearFormData();
+      } else if (status && formRef.current.length > 2) {
+        formRef.current = formRef.current.slice(0, -1);
+        clearFormData();
+      }
+      setActiveLogin(() => status);
+    },
+    [clearFormData],
+  );
   return (
     <>
       <Tab changeActive={changeActiveLogin} />
-      <List>
-        {formRef.current.map((val) => {
-          const { prefixIcon: Icon, components: Components, suffixComponent: SuffixComponents } = val;
-          return (
-            <ListItem key={val.name}>
-              <Icon fontSize={24} />
-              <Components placeholder={val.placeholder || ''} type={val.type || 'text'} />
-              {SuffixComponents && <SuffixComponents width={100} height={50} text={'1234'} />}
-            </ListItem>
-          );
-        })}
-        <Button block color="primary" fill="solid">
-          确定
-        </Button>
-      </List>
+      <form>
+        <List>
+          {formRef.current.map((val) => {
+            const { prefixIcon: Icon, components: Components, suffixComponent: SuffixComponents } = val;
+            return (
+              <ListItem key={val.name}>
+                <Icon fontSize={24} />
+                <Components
+                  placeholder={val.placeholder || ''}
+                  value={data[val.field]}
+                  type={val.type || 'text'}
+                  autoComplete={val.type === 'password' ? 'on' : null}
+                  onChange={(value: string) => setFieldValue({ [val.field]: value })}
+                />
+                {SuffixComponents && <SuffixComponents width={100} height={50} text={'1234'} />}
+              </ListItem>
+            );
+          })}
+          <Button block color="primary" fill="solid">
+            确定
+          </Button>
+        </List>
+      </form>
     </>
   );
 };

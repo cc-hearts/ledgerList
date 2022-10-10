@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { primaryColor } from '@/constants/css';
 import { useCallback, useRef } from 'react';
 import { useState } from 'react';
+import { memo } from 'react';
 const Tab = styled.div`
   color: ${primaryColor};
   padding: 0 2rem;
@@ -51,4 +52,4 @@ const TabComponent: React.FC<Props> = ({ changeActive }) => {
     </Tab>
   );
 };
-export default TabComponent;
+export default memo(TabComponent);
