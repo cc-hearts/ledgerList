@@ -2,10 +2,11 @@ import { UnlockOutline, UserContactOutline, LinkOutline } from 'antd-mobile-icon
 import { Button, Input } from '@/components/antd-mobile/index';
 import { useRef, useState, useCallback } from 'react';
 import Verification from '@/components/verification/verification';
-import type { SVGProps } from 'react';
 import Tab from './login.title';
 import styled from 'styled-components';
 import useFormData from './useForm';
+import { geneVerification } from '@/lib/shard';
+import type { SVGProps } from 'react';
 const List = styled.div`
   width: 100%;
   padding: 0 2rem;
@@ -66,6 +67,10 @@ const Login = () => {
       placeholder: '请输入密码',
     },
   ]);
+  const [validate, setValidate] = useState(geneVerification());
+  const handleCanvasChange = useCallback(() => {
+    setValidate(geneVerification());
+  }, []);
   const changeActiveLogin = useCallback(
     (status: boolean) => {
       if (!status && formRef.current.length === 2) {
@@ -104,7 +109,7 @@ const Login = () => {
                   autoComplete={val.type === 'password' ? 'on' : null}
                   onChange={(value: string) => setFieldValue({ [val.field]: value })}
                 />
-                {SuffixComponents && <SuffixComponents width={100} height={50} text={'1234'} />}
+                {SuffixComponents && <SuffixComponents width={100} height={50} text={validate} handleCanvasChange={handleCanvasChange} />}
               </ListItem>
             );
           })}

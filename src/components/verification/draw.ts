@@ -6,7 +6,7 @@ function defineDrawTextMethod(): 'fillText' | 'strokeText' {
   return Math.random() >= 0.5 ? 'fillText' : 'strokeText';
 }
 
-function defineRotateAngle(minAngle: number = 0, maxAngle: number = 360): number {
+function defineRotateAngle(minAngle = 0, maxAngle = 360): number {
   const angle = random(minAngle, maxAngle);
   return (Math.PI * angle) / 180;
 }
@@ -70,7 +70,7 @@ function drawVerification(
       fillColor = defineColor();
     }
     ctx.fillStyle = defineColor();
-    let drawWidth = Math.max(containerWidth * i, 0) + random(0, containerWidth - fontSize);
+    const drawWidth = Math.max(containerWidth * i, 0) + random(0, containerWidth - fontSize);
     ctx.translate(drawWidth, drawHeight);
     ctx.rotate(angle);
     const drawTextMethod = defineDrawTextMethod();
