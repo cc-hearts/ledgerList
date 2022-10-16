@@ -71,6 +71,7 @@ const Login = () => {
   const handleCanvasChange = useCallback(() => {
     setValidate(geneVerification());
   }, []);
+  console.log(validate);
   const changeActiveLogin = useCallback(
     (status: boolean) => {
       if (!status && formRef.current.length === 2) {

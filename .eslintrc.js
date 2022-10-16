@@ -16,6 +16,7 @@ module.exports = {
     'prefer-rest-params': 0, // 关闭使用 rest 参数
     '@typescript-eslint/consistent-type-imports': 'error', // 当只引用类型时，自动加上 type 操作符
     'no-unused-vars': 'off',
+    '@typescript-eslint/no-var-requires': 0,
     '@typescript-eslint/no-unused-vars': ['error'],
     '@typescript-eslint/no-explicit-any': 0,
     'prettier/prettier': 'error', // 被prettier标记的地方抛出错误
