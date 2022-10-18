@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, memo } from 'react';
 import { drawVerification } from './draw';
 import { noop } from '../../lib/shard';
 interface Props {
@@ -21,7 +21,6 @@ const Verification: React.FC<Props> = ({ text, height = 150, width = 300, handle
       };
       const ctx = canvas.getContext('2d');
       ctx?.clearRect(0, 0, width, height);
-      console.log(text);
       ctx && text && drawVerification(ctx, text, canvasAttributes);
     }
   }, [text, height, width]);
@@ -32,4 +31,4 @@ const Verification: React.FC<Props> = ({ text, height = 150, width = 300, handle
   );
 };
 
-export default Verification;
+export default memo(Verification);

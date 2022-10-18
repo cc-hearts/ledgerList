@@ -1,11 +1,12 @@
 import { UnlockOutline, UserContactOutline, LinkOutline } from 'antd-mobile-icons';
 import { Button, Input } from '@/components/antd-mobile/index';
-import { useRef, useState, useCallback } from 'react';
+import { useRef, useState, useCallback, useEffect } from 'react';
 import Verification from '@/components/verification/verification';
 import Tab from './login.title';
 import styled from 'styled-components';
 import useFormData from './useForm';
-import { geneVerification } from '@/lib/shard';
+// import { geneVerification } from '@/lib/shard';
+import { getVerification, changeVerification } from './service';
 import type { SVGProps } from 'react';
 const List = styled.div`
   width: 100%;
@@ -67,11 +68,17 @@ const Login = () => {
       placeholder: '请输入密码',
     },
   ]);
-  const [validate, setValidate] = useState(geneVerification());
-  const handleCanvasChange = useCallback(() => {
-    setValidate(geneVerification());
+  const [validate, setValidate] = useState<string | null>(null);
+  useEffect(() => {
+    getVerification().then((res) => {
+      setValidate(res.data);
+    });
   }, []);
-  console.log(validate);
+  const handleCanvasChange = useCallback(() => {
+    changeVerification().then((res) => {
+      setValidate(res.data);
+    });
+  }, []);
   const changeActiveLogin = useCallback(
     (status: boolean) => {
       if (!status && formRef.current.length === 2) {

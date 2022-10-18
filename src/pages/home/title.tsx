@@ -6,8 +6,6 @@ const Title = styled.div`
 const Image = styled.img`
   width: 100%;
   object-fit: contain;
-  opacity: 0.4;
-  mask: ;
 `;
 export default () => {
   return (
