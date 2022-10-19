@@ -43,13 +43,13 @@ function drawVerification(
   ctx.fillRect(0, 0, width, height);
   ctx.restore();
   // 随机线条分布
-  const lineNumber = random(0, 10);
+  const lineNumber = random(0, 30);
   for (let i = 0; i < lineNumber; i++) {
     ctx.save();
     ctx.strokeStyle = defineColor();
     ctx.globalAlpha = random(0, 0.8);
     ctx.beginPath();
-    ctx.translate(random(0, width / 2), random(0, height / 2));
+    ctx.translate(random(0, width), random(0, height));
     ctx.rotate(defineRotateAngle(minAngle, maxAngle));
     ctx.moveTo(0, 0);
     ctx.lineTo(random(0, width), random(0, height));

@@ -1,130 +1,51 @@
-import { UnlockOutline, UserContactOutline, LinkOutline } from 'antd-mobile-icons';
-import { Button, Input } from '@/components/antd-mobile/index';
-import { useRef, useState, useCallback, useEffect } from 'react';
-import Verification from '@/components/verification/verification';
+import { Button } from '@/components/antd-mobile/index';
+import { useRef, useState, useCallback } from 'react';
 import Tab from './login.title';
+import { loginUser, registerUser } from './service';
+import { successTips } from '../../utils/message';
+import LoginForm from './form';
+import type { loginForm } from './form';
 import styled from 'styled-components';
-import useFormData from './useForm';
-// import { geneVerification } from '@/lib/shard';
-import { getVerification, changeVerification } from './service';
-import type { SVGProps } from 'react';
-const List = styled.div`
+
+const ButtonWrapper = styled.div`
   width: 100%;
   padding: 0 2rem;
 `;
-const ListItem = styled.div`
-  display: flex;
-  margin: 0.8rem 0;
-  align-items: center;
-  & svg {
-    margin-right: 0.8rem;
-  }
-  & > div {
-    flex: 1;
-  }
-  & input {
-    border: none;
-    width: 100%;
-    background: transparent;
-    padding: 1rem 0;
-    &:focus-visible {
-      outline: none;
-    }
-  }
-`;
 
-interface loginForm {
-  username: string;
-  password: string;
-  verification: string;
-  [props: string]: unknown;
-}
-interface FormList {
-  name: string;
-  prefixIcon: React.FC<SVGProps<SVGSVGElement>>;
-  components: any;
-  placeholder?: string;
-  type?: string;
-  suffixComponent?: React.FC<any>;
-  field: string;
-}
 const Login = () => {
-  const [, setActiveLogin] = useState(true);
-  const { data, setFieldValue, clearFormData } = useFormData<loginForm>({ username: '', password: '', verification: '' });
-  const formRef = useRef<Array<FormList>>([
-    {
-      name: 'username',
-      prefixIcon: UserContactOutline,
-      components: Input,
-      field: 'username',
-      placeholder: '请输入账号',
-    },
-    {
-      name: 'password',
-      prefixIcon: UnlockOutline,
-      components: Input,
-      type: 'password',
-      field: 'password',
-      placeholder: '请输入密码',
-    },
-  ]);
-  const [validate, setValidate] = useState<string | null>(null);
-  useEffect(() => {
-    getVerification().then((res) => {
-      setValidate(res.data);
-    });
+  const [active, setActiveLogin] = useState(true);
+  const [disabled, setDisabled] = useState(false);
+  const formsRef = useRef<{ getData: () => loginForm; clearFormData: (...args: any[]) => void }>(null);
+  const changeActiveLogin = useCallback(() => {
+    setActiveLogin((state) => !state);
+    formsRef.current?.clearFormData();
   }, []);
-  const handleCanvasChange = useCallback(() => {
-    changeVerification().then((res) => {
-      setValidate(res.data);
-    });
-  }, []);
-  const changeActiveLogin = useCallback(
-    (status: boolean) => {
-      if (!status && formRef.current.length === 2) {
-        // 改为注册状态
-        formRef.current.push({
-          name: 'verification',
-          prefixIcon: LinkOutline,
-          field: 'verification',
-          suffixComponent: Verification,
-          components: Input,
-          placeholder: '请输入验证码',
-        });
-        clearFormData();
-      } else if (status && formRef.current.length > 2) {
-        formRef.current = formRef.current.slice(0, -1);
-        clearFormData();
-      }
-      setActiveLogin(() => status);
-    },
-    [clearFormData],
-  );
+
+  const handleSubmit = useCallback(() => {
+    if (!formsRef.current) return;
+    setDisabled(true);
+    const data = formsRef.current.getData();
+    (active ? loginUser : registerUser)({ ...data })
+      .then((res) => {
+        successTips(res.message);
+        if (!active) {
+          changeActiveLogin();
+        }
+      })
+      .finally(() => setDisabled(false));
+  }, [active, changeActiveLogin]);
+
+  console.log('render: login.tsx');
   return (
     <>
-      <Tab changeActive={changeActiveLogin} />
+      <Tab changeActive={changeActiveLogin} active={active} />
       <form>
-        <List>
-          {formRef.current.map((val) => {
-            const { prefixIcon: Icon, components: Components, suffixComponent: SuffixComponents } = val;
-            return (
-              <ListItem key={val.name}>
-                <Icon fontSize={24} />
-                <Components
-                  placeholder={val.placeholder || ''}
-                  value={data[val.field]}
-                  type={val.type || 'text'}
-                  autoComplete={val.type === 'password' ? 'on' : null}
-                  onChange={(value: string) => setFieldValue({ [val.field]: value })}
-                />
-                {SuffixComponents && <SuffixComponents width={100} height={50} text={validate} handleCanvasChange={handleCanvasChange} />}
-              </ListItem>
-            );
-          })}
-          <Button block color="primary" fill="solid">
+        <LoginForm active={active} formRefs={formsRef} />
+        <ButtonWrapper>
+          <Button block color="primary" fill="solid" onClick={handleSubmit} loading={disabled}>
             确定
           </Button>
-        </List>
+        </ButtonWrapper>
       </form>
     </>
   );

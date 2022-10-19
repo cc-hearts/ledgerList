@@ -7,29 +7,18 @@
  */
 
 import { objectToParams } from './shard';
+import { errorTips } from './message';
+import type { BaseResponse } from './baseResponse';
 enum requestType {
   GET = 'GET',
   POST = 'POST',
   PUT = 'PUT',
   DELETE = 'DELETE',
 }
-
 const successCode = [200, 0];
-
 type params = Record<string, any>;
-
 type postType = 'application/x-www-form-urlencoded' | 'application/json' | 'multipart/form-data';
-
-type responseType = string | Record<string, any>;
-
-type defaultType = Record<string, any>;
-
-interface requestParams {
-  code: string | number;
-}
-
 // type requestBodyType = ArrayBuffer | Blob | FormData | string | Record<string, any>
-
 const baseUrl = 'http://localhost:3363/';
 
 function isSpecifyResponseType(contentType: string, reg: RegExp): boolean {
@@ -44,7 +33,7 @@ function isResponseJson(contentType: string): boolean {
   return isSpecifyResponseType(contentType, /application\/json/);
 }
 
-function request<T extends responseType>(url = '', data: RequestInit = { method: 'GET' }): Promise<T> {
+function request<T>(url = '', data: RequestInit = { method: 'GET' }): Promise<BaseResponse<T>> {
   const pathUrl = baseUrl + url;
   return new Promise((resolve, reject) => {
     fetch(pathUrl, data)
@@ -58,12 +47,13 @@ function request<T extends responseType>(url = '', data: RequestInit = { method:
       .then((jsonData) => {
         // 全局状态判断
         try {
-          const val: T & requestParams = jsonData;
+          const val: BaseResponse<T> = jsonData;
           // 判断状态码
           if (successCode.includes(Number(val.code))) {
             resolve(val);
           } else {
             // 失败之后的判断等
+            errorTips(val.message);
             return reject(val);
           }
         } catch (e) {
@@ -78,22 +68,22 @@ function request<T extends responseType>(url = '', data: RequestInit = { method:
   });
 }
 
-function requestMethod<T extends responseType>(url: string, type: requestType, requestInit: RequestInit): Promise<T> {
+function requestMethod<T>(url: string, type: requestType, requestInit: RequestInit): Promise<BaseResponse<T>> {
   return request(url, Object.assign({ method: type }, requestInit));
 }
 
-export function Get<T extends responseType = defaultType>(url: string, params?: params, requestInit: RequestInit = {}): Promise<T> {
+export function Get<T, U extends params = params>(url: string, params?: U, requestInit: RequestInit = {}): Promise<BaseResponse<T>> {
   const enCodeParams = objectToParams(params);
   const fullPath = url + `?${enCodeParams}`;
   return requestMethod(fullPath, requestType.GET, requestInit);
 }
 
-function postRequest<T extends responseType>(url: string, requestInit: RequestInit = {}, ContentType?: postType): Promise<T> {
+function postRequest<T>(url: string, requestInit: RequestInit = {}, ContentType?: postType): Promise<BaseResponse<T>> {
   requestInit.headers = Object.assign({}, requestInit.headers || {}, { 'Content-Type': ContentType });
   return request(url, Object.assign({ method: requestType.POST }, requestInit));
 }
 
-export function Post<T extends responseType = defaultType>(url: string, params?: params, requestInit: RequestInit = {}): Promise<T> {
+export function Post<T, U extends params = params>(url: string, params?: U, requestInit: RequestInit = {}): Promise<BaseResponse<T>> {
   try {
     requestInit.body = JSON.stringify(params);
   } catch (err) {
@@ -102,11 +92,11 @@ export function Post<T extends responseType = defaultType>(url: string, params?:
   return postRequest(url, requestInit, 'application/json');
 }
 
-export function FormDataPost<T extends responseType = defaultType>(url: string, params?: params, requestInit: RequestInit = {}): Promise<T> {
+export function FormDataPost<T>(url: string, params?: params, requestInit: RequestInit = {}): Promise<BaseResponse<T>> {
   // formData形式
   return postRequest(url, requestInit, 'application/x-www-form-urlencoded');
 }
-export function MultiPost<T extends responseType = defaultType>(url: string, params?: params, requestInit: RequestInit = {}): Promise<T> {
+export function MultiPost<T>(url: string, params?: params, requestInit: RequestInit = {}): Promise<BaseResponse<T>> {
   // new FormData形式
   return postRequest(url, requestInit, 'multipart/form-data');
 }

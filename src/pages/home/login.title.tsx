@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { primaryColor } from '@/constants/css';
-import { useCallback, useRef } from 'react';
-import { useState } from 'react';
+import { useRef } from 'react';
 import { memo } from 'react';
 const Tab = styled.div`
   color: ${primaryColor};
@@ -26,25 +25,20 @@ const Tab = styled.div`
 `;
 interface Props {
   changeActive: (status: boolean) => void;
+  active: boolean;
 }
-const TabComponent: React.FC<Props> = ({ changeActive }) => {
+const TabComponent: React.FC<Props> = ({ changeActive, active }) => {
   const tabList = useRef([
-    { title: '登陆', value: 'login' },
-    { title: '注册', value: 'register' },
+    { title: '登陆', value: true, id: 'login' },
+    { title: '注册', value: false, id: 'register' },
   ]);
-  const [activeTab, setActiveTab] = useState<string>('login');
-  const toggleActive = useCallback(
-    (value: string) => {
-      setActiveTab(() => value);
-      changeActive(value === 'login');
-    },
-    [changeActive],
-  );
+  const toggleActive = () => changeActive(!active);
+  console.log('login.title.tsx');
   return (
     <Tab>
       {tabList.current.map((tabs) => {
         return (
-          <span key={tabs.value} className={activeTab === tabs.value ? 'tab-active' : ''} onClick={() => toggleActive(tabs.value)}>
+          <span key={tabs.id} className={active === tabs.value ? 'tab-active' : ''} onClick={toggleActive}>
             {tabs.title}
           </span>
         );
