@@ -32,13 +32,16 @@ const TabComponent: React.FC<Props> = ({ changeActive, active }) => {
     { title: '登陆', value: true, id: 'login' },
     { title: '注册', value: false, id: 'register' },
   ]);
-  const toggleActive = () => changeActive(!active);
+  const toggleActive = (bool: boolean) => {
+    if (bool === active) return;
+    changeActive(!bool);
+  };
   console.log('login.title.tsx');
   return (
     <Tab>
       {tabList.current.map((tabs) => {
         return (
-          <span key={tabs.id} className={active === tabs.value ? 'tab-active' : ''} onClick={toggleActive}>
+          <span key={tabs.id} className={active === tabs.value ? 'tab-active' : ''} onClick={() => toggleActive(tabs.value)}>
             {tabs.title}
           </span>
         );

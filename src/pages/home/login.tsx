@@ -2,8 +2,9 @@ import { Button } from '@/components/antd-mobile/index';
 import { useRef, useState, useCallback } from 'react';
 import Tab from './login.title';
 import { loginUser, registerUser } from './service';
-import { successTips } from '../../utils/message';
+import { errorTips, successTips } from '../../utils/message';
 import LoginForm from './form';
+import { history } from 'umi';
 import type { loginForm } from './form';
 import styled from 'styled-components';
 
@@ -28,9 +29,20 @@ const Login = () => {
     (active ? loginUser : registerUser)({ ...data })
       .then((res) => {
         successTips(res.message);
+        if (!res.data) {
+          errorTips('登陆失败 token无法获取');
+          return;
+        }
+        if (typeof res.data === 'string') {
+          // TODO: register
+          return;
+        }
+        const { token } = res && res.data;
+        localStorage.setItem('token', token);
         if (!active) {
           changeActiveLogin();
         }
+        history.push('/');
       })
       .finally(() => setDisabled(false));
   }, [active, changeActiveLogin]);
