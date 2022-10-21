@@ -47,12 +47,12 @@ const Auxiliary = ({ icon: ComponentIcon = EditSOutline, fontSize = '24px', colo
     const rect = buttonRef.current?.getBoundingClientRect?.();
     if (rect) {
       const isLeft = rect?.left < screen.width / 2;
-      // 边界情况判定
+      // 下边界情况判定
       if (buttonRef.current && coordinate.current) {
         buttonRef.current.setAttribute(
           'style',
           `transition:all 300ms cubic-bezier(0.36, 1, 0.58, 1);transform: translate(${isLeft ? 0 - coordinate.current.left : 0}px,${
-            rect.top - coordinate.current.top
+            (rect.top < 0 ? 0 : rect.top) - coordinate.current.top
           }px)`,
         );
       }
