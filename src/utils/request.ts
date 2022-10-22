@@ -33,8 +33,18 @@ function isResponseJson(contentType: string): boolean {
   return isSpecifyResponseType(contentType, /application\/json/);
 }
 
+function requestInterface(data: RequestInit) {
+  const token = localStorage.getItem('token');
+  if (token) {
+    !data.headers && (data.headers = {});
+    Reflect.set(data.headers, 'TOKEN', token);
+  }
+}
+
 function request<T>(url = '', data: RequestInit = { method: 'GET' }): Promise<BaseResponse<T>> {
   const pathUrl = baseUrl + url;
+  // 请求拦截
+  requestInterface(data);
   return new Promise((resolve, reject) => {
     fetch(pathUrl, data)
       .then((response) => {
@@ -73,8 +83,9 @@ function requestMethod<T>(url: string, type: requestType, requestInit: RequestIn
 }
 
 export function Get<T, U extends params = params>(url: string, params?: U, requestInit: RequestInit = {}): Promise<BaseResponse<T>> {
-  const enCodeParams = objectToParams(params);
-  const fullPath = url + `?${enCodeParams}`;
+  let enCodeParams = objectToParams(params);
+  enCodeParams = enCodeParams.trim() !== '' ? `?${enCodeParams}` : '';
+  const fullPath = url + enCodeParams;
   return requestMethod(fullPath, requestType.GET, requestInit);
 }
 

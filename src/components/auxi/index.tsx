@@ -6,6 +6,7 @@
 import styled from 'styled-components';
 import { EditSOutline } from 'antd-mobile-icons';
 import { useRef } from 'react';
+import { noop } from '@/lib/shard';
 const Button = styled.div`
   display: flex;
   justify-content: center;
@@ -18,7 +19,7 @@ const Button = styled.div`
   bottom: calc(2rem + 44px);
   right: 0.5rem;
 `;
-const Auxiliary = ({ icon: ComponentIcon = EditSOutline, fontSize = '24px', color = '#fff' }) => {
+const Auxiliary = ({ icon: ComponentIcon = EditSOutline, fontSize = '24px', color = '#fff', callback = noop }) => {
   const buttonRef = useRef<HTMLDivElement | null>(null);
   const coordinate = useRef<{ x: number; y: number; left: number; top: number; width: number; height: number }>({
     x: 0,
@@ -63,7 +64,6 @@ const Auxiliary = ({ icon: ComponentIcon = EditSOutline, fontSize = '24px', colo
   const handleTouchMove = (e: any) => {
     const coor = e.nativeEvent.changedTouches[0];
     if (buttonRef.current && coor && coordinate.current) {
-      console.log(coor.pageX - coordinate.current.left);
       buttonRef.current.setAttribute(
         'style',
         `transform: translate(${coor.pageX - coordinate.current?.left - coordinate.current.width}px,${
@@ -73,9 +73,13 @@ const Auxiliary = ({ icon: ComponentIcon = EditSOutline, fontSize = '24px', colo
     }
     return false;
   };
+
+  const handleClick = () => {
+    callback instanceof Function && callback();
+  };
   return (
     <>
-      <Button ref={buttonRef} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd}>
+      <Button ref={buttonRef} onTouchStart={handleTouchStart} onTouchMove={handleTouchMove} onTouchEnd={handleTouchEnd} onClick={handleClick}>
         <ComponentIcon color={color} fontSize={fontSize} />
       </Button>
     </>

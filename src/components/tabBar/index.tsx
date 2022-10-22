@@ -15,6 +15,7 @@ const Tab = styled.ul`
   padding-inline-start: 0;
   display: flex;
   font-size: 1rem;
+  background-color: var(--primary-tab-bar-color, #fff);
 `;
 const TabItem = styled.li`
   flex: 1;

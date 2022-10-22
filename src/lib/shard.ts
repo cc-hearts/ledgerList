@@ -1,6 +1,8 @@
 export const _toString = Object.prototype.toString;
 export const commonStr = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-export const noop = {};
+export const noop = () => {
+  /* */
+};
 export function clearObjectData<T extends Record<string, unknown>>(data: T): T {
   const keys = Object.keys(data);
   const newData = Object.assign({}, data);

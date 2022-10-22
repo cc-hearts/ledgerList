@@ -8,7 +8,7 @@ import { history } from 'umi';
 import type { loginForm } from './form';
 import styled from 'styled-components';
 
-const ButtonWrapper = styled.div`
+export const ButtonWrapper = styled.div`
   width: 100%;
   padding: 0 2rem;
 `;
