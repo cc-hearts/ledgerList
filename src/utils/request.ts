@@ -82,7 +82,7 @@ function requestMethod<T>(url: string, type: requestType, requestInit: RequestIn
   return request(url, Object.assign({ method: type }, requestInit));
 }
 
-export function Get<T, U extends params = params>(url: string, params?: U, requestInit: RequestInit = {}): Promise<BaseResponse<T>> {
+export function Get<T = undefined, U extends params = params>(url: string, params?: U, requestInit: RequestInit = {}): Promise<BaseResponse<T>> {
   let enCodeParams = objectToParams(params);
   enCodeParams = enCodeParams.trim() !== '' ? `?${enCodeParams}` : '';
   const fullPath = url + enCodeParams;
@@ -94,7 +94,7 @@ function postRequest<T>(url: string, requestInit: RequestInit = {}, ContentType?
   return request(url, Object.assign({ method: requestType.POST }, requestInit));
 }
 
-export function Post<T, U extends params = params>(url: string, params?: U, requestInit: RequestInit = {}): Promise<BaseResponse<T>> {
+export function Post<T = undefined, U extends params = params>(url: string, params?: U, requestInit: RequestInit = {}): Promise<BaseResponse<T>> {
   try {
     requestInit.body = JSON.stringify(params);
   } catch (err) {
