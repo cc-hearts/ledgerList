@@ -29,7 +29,7 @@ const Login = () => {
     (active ? loginUser : registerUser)({ ...data })
       .then((res) => {
         successTips(res.message);
-        if (!res.data) {
+        if (!res.data && active) {
           errorTips('登陆失败 token无法获取');
           return;
         }
@@ -37,10 +37,11 @@ const Login = () => {
           // TODO: register
           return;
         }
-        const { token } = res && res.data;
-        localStorage.setItem('token', token);
         if (!active) {
           changeActiveLogin();
+        } else {
+          const token = res?.data?.token;
+          token && localStorage.setItem('token', token);
         }
         history.push('/');
       })

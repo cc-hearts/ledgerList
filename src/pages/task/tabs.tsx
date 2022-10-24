@@ -6,8 +6,7 @@
 import { JumboTab } from '@/components/antd-mobile';
 import { useCallback, useRef } from 'react';
 import type { MobileFieldProps } from './types';
-import { ClockCircleOutline } from 'antd-mobile-icons';
-const basicColumns = [{ label: '日常', value: 'Mon', icon: ClockCircleOutline }];
+import { basicColumns } from './constant';
 const TabsFormItem: React.FC<MobileFieldProps<string> & { useDefaultValue: boolean }> = ({ value, onChange, useDefaultValue = false }) => {
   const handleChange = useCallback(
     (key: string) => {

@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import EditSvg from '@/assets/svg/edit.svg';
 import DeleteSvg from '@/assets/svg/delete.svg';
 import { noop } from '@/lib/shard';
+import { getBasicLabel } from './constant';
+import RoleSvg from '@/assets/svg/role.svg';
 import { catchErrorTip, successTips } from '@/utils/message';
 const CardWrapper = styled.div`
   padding: 1rem;
@@ -27,6 +29,10 @@ const Title = styled.div`
 
 const Container = styled.div`
   flex: 1;
+  & div {
+    padding: 0.2rem;
+    font-size: 1rem;
+  }
 `;
 
 const Operation = styled.div`
@@ -35,6 +41,37 @@ const Operation = styled.div`
   margin-right: 0.5rem;
   justify-content: space-between;
 `;
+
+const Tag = styled.span`
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.3rem;
+  background-color: var(--primary-background, #3a3a3a);
+  color: var(--primary-color, #aac8e4);
+`;
+const SubTitle = styled.h2`
+  text-align: center;
+  margin: 4rem 0;
+`;
+
+const Circle = styled.div`
+  position: absolute;
+  left: -22%;
+  top: -3%;
+  width: 10rem;
+  height: 10rem;
+  border-radius: 50%;
+  background-color: #ff6d6d;
+  mix-blend-mode: multiply;
+`;
+const OCircle = styled(Circle)`
+  left: -5%;
+  top: -13%;
+`;
+
+const Wrapper = styled.div`
+  text-align: center;
+`;
+
 interface Props {
   getDataRef: Ref<getDataRef> | undefined;
   FormImplRef: RefObject<formRef>;
@@ -97,6 +134,12 @@ const List: React.FC<Props> = ({ getDataRef, FormImplRef, showPopup = noop }) =>
   );
   return (
     <>
+      <Circle></Circle>
+      <OCircle></OCircle>
+      <SubTitle>TODO LIST</SubTitle>
+      <Wrapper>
+        <img src={RoleSvg} />
+      </Wrapper>
       {list &&
         list.map((item: { label: string; children: Array<task> }) => {
           return (
@@ -108,7 +151,7 @@ const List: React.FC<Props> = ({ getDataRef, FormImplRef, showPopup = noop }) =>
                     <Card key={record.id}>
                       <Container>
                         <div>{record.content}</div>
-                        <div>{record.tag}</div>
+                        <Tag>{getBasicLabel(record.tag)}</Tag>
                       </Container>
                       <Operation>
                         <img src={EditSvg} alt="编辑" onClick={() => handleEditTask(record)} />
