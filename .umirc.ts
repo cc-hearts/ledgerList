@@ -11,6 +11,7 @@ export default defineConfig({
       component: '@/views/Layout/index',
       routes: [
         { path: '/task', component: '@/pages/task/index' },
+        { path: '/fetch', component: '@/pages/test/fetch' },
         // { path: '/', redirect: '/login' },
         // { path: '/login', component: '@/pages/home' },
         // { path: '/test', component: '@/components/verification/verification' },
