@@ -2,7 +2,7 @@ import { Button } from '@/components/antd-mobile/index';
 import { useRef, useState, useCallback } from 'react';
 import Tab from './login.title';
 import { loginUser, registerUser } from './service';
-import { errorTips, successTips } from '../../utils/message';
+import { catchErrorTip, errorTips, successTips } from '../../utils/message';
 import LoginForm from './form';
 import { history } from 'umi';
 import type { loginForm } from './form';
@@ -43,9 +43,13 @@ const Login = () => {
           const token = res?.data?.token;
           token && localStorage.setItem('token', token);
         }
-        history.push('/');
+        setDisabled(false);
+        history.push('/task');
       })
-      .finally(() => setDisabled(false));
+      .catch((e) => {
+        catchErrorTip(e);
+        setDisabled(false);
+      });
   }, [active, changeActiveLogin]);
 
   console.log('render: login.tsx');
