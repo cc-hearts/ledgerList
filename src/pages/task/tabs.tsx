@@ -4,7 +4,7 @@
  * @Date 2022-10-22
  */
 import { JumboTab } from '@/components/antd-mobile';
-import { useCallback, useRef } from 'react';
+import { useCallback, useEffect } from 'react';
 import type { MobileFieldProps } from './types';
 import { basicColumns } from './constant';
 const TabsFormItem: React.FC<MobileFieldProps<string> & { useDefaultValue: boolean }> = ({ value, onChange, useDefaultValue = false }) => {
@@ -14,11 +14,11 @@ const TabsFormItem: React.FC<MobileFieldProps<string> & { useDefaultValue: boole
     },
     [onChange],
   );
-  const _first = useRef(false);
-  if (!_first.current) {
-    _first.current = true;
-    useDefaultValue && onChange && onChange(basicColumns[0].value);
-  }
+  useEffect(() => {
+    if (!value && useDefaultValue && basicColumns[0].value && onChange instanceof Function) {
+      onChange(basicColumns[0].value);
+    }
+  }, [useDefaultValue, value, onChange]);
   return (
     <JumboTab activeKey={value} onChange={handleChange}>
       {basicColumns.map((val) => {

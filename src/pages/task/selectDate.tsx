@@ -1,7 +1,7 @@
 import { Calendar, Popup, Selector } from '@/components/antd-mobile';
 import { Input } from '@/feature/components/index';
 import { noop } from '@/lib/shard';
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import type { MobileFieldProps } from './types';
 import dayjs from 'dayjs';
@@ -26,7 +26,7 @@ const options = [
     value: 'range',
   },
 ];
-const SelectDate: React.FC<MobileFieldProps<string>> = ({ value, onChange }) => {
+const SelectDate: React.FC<MobileFieldProps<string> & { useSingleCurrentDate: boolean }> = ({ value, onChange, useSingleCurrentDate = false }) => {
   const [visible, setVisible] = useState(false);
   const toggleVisible = useCallback(() => {
     setVisible((visible) => !visible);
@@ -55,12 +55,20 @@ const SelectDate: React.FC<MobileFieldProps<string>> = ({ value, onChange }) => 
   const handleCalendarValue = useCallback((val: Date | [Date, Date] | null) => {
     calRef.current = val;
   }, []);
+
+  useEffect(() => {
+    if (useSingleCurrentDate && !value && onChange instanceof Function) {
+      if (selectionMode === 'single') {
+        onChange(dayjs().format('YYYY/MM/DD'));
+      }
+    }
+  }, [onChange, value, useSingleCurrentDate, selectionMode]);
   return (
     <>
       <Input placeholder="请选择日期" value={value || ''} onChange={noop} click={toggleVisible} readonly />
       <Popup visible={visible} onMaskClick={toggleVisible}>
         <WrapperTitle>
-          <Selector options={options} defaultValue={[options[0].value]} onChange={handleChangeCalendarSelect} />
+          <Selector options={options} onChange={handleChangeCalendarSelect} />
           <Accept onClick={selectDate}>确定</Accept>
         </WrapperTitle>
         <Calendar selectionMode={selectionMode} onChange={handleCalendarValue} />

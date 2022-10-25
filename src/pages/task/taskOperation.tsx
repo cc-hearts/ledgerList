@@ -75,7 +75,7 @@ const TaskOperation: React.FC<Props> = ({ toggleVisible = noop, getDataRef, form
           <Tabs useDefaultValue />
         </Form.Item>
         <Form.Item name="date" label="日期" rules={[{ required: true }]}>
-          <SelectDate />
+          <SelectDate useSingleCurrentDate />
         </Form.Item>
         <Form.Item name="content" label="内容" rules={[{ required: true }]}>
           <Input placeholder="请输入待办事项" />
