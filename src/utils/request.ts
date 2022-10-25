@@ -9,6 +9,7 @@
 import { objectToParams } from './shard';
 import { errorTips } from './message';
 import type { BaseResponse } from './baseResponse';
+import { history } from 'umi';
 enum requestType {
   GET = 'GET',
   POST = 'POST',
@@ -65,6 +66,11 @@ function request<T>(url = '', data: RequestInit = { method: 'GET' }): Promise<Ba
           } else {
             // 失败之后的判断等
             errorTips(val.message);
+            if (val.code === 401) {
+              window.localStorage.removeItem('token');
+              history.push('/login');
+              return;
+            }
             return reject(val);
           }
         } catch (e) {

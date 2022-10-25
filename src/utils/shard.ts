@@ -1,7 +1,6 @@
 export const noop = () => {
   /** noop */
 };
-
 export function objectToParams(obj: Record<string, any> | undefined): string {
   if (typeof obj === 'object') {
     let params = '';
