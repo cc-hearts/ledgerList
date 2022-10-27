@@ -4,9 +4,9 @@ import { useHistory, useLocation } from 'umi';
 interface Props {
   tabBarItem: Array<{ name: string; path: string; icon: React.FC<any>; callback?: (...args: any[]) => void }>;
 }
-
 const Tab = styled.ul`
   position: fixed;
+  box-sizing: content-box;
   bottom: 0;
   left: 0;
   right: 0;
@@ -15,7 +15,11 @@ const Tab = styled.ul`
   padding-inline-start: 0;
   display: flex;
   font-size: 1rem;
+  height: 3rem;
   background-color: var(--primary-tab-bar-color, #fff);
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+  background-color: #fff;
 `;
 const TabItem = styled.li`
   flex: 1;

@@ -53,6 +53,10 @@ const SubTitle = styled.h2`
   margin: 4rem 0;
 `;
 
+const SubTitleWrapper = styled.div`
+  overflow: hidden;
+`;
+
 const Circle = styled.div`
   position: absolute;
   left: -22%;
@@ -136,7 +140,9 @@ const List: React.FC<Props> = ({ getDataRef, FormImplRef, showPopup = noop }) =>
     <>
       <Circle></Circle>
       <OCircle></OCircle>
-      <SubTitle>TODO LIST</SubTitle>
+      <SubTitleWrapper>
+        <SubTitle>TODO LIST</SubTitle>
+      </SubTitleWrapper>
       <Wrapper>
         <img src={RoleSvg} />
       </Wrapper>

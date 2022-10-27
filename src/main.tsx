@@ -1,5 +1,4 @@
 import React from 'react';
-import './main.less';
 import styled from 'styled-components';
 
 const Container = styled.div``;
