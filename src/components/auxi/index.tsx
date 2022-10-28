@@ -72,8 +72,6 @@ const Auxiliary = ({ icon: ComponentIcon = EditSOutline, fontSize = '24px', colo
     const coor = e.nativeEvent.changedTouches[0];
     if (buttonRef.current && coor && coordinate.current) {
       // pageX - scrollX = clientX
-      console.log(coor.clientY, coordinate.current?.top, coordinate.current.height);
-      console.log(getSafeButton());
 
       buttonRef.current.setAttribute(
         'style',

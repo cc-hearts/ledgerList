@@ -20,7 +20,7 @@ const successCode = [200, 0];
 type params = Record<string, any>;
 type postType = 'application/x-www-form-urlencoded' | 'application/json' | 'multipart/form-data';
 // type requestBodyType = ArrayBuffer | Blob | FormData | string | Record<string, any>
-const urlArray = ['http://8.210.91.28:3363/', 'http://8.210.91.28:3363/'];
+const urlArray = ['http://localhost:3363/', 'http://8.210.91.28:3363/'];
 const baseUrl = urlArray[process.env.NODE_ENV === 'development' ? 0 : 1];
 
 function isSpecifyResponseType(contentType: string, reg: RegExp): boolean {
