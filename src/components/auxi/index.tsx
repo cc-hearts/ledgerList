@@ -32,7 +32,9 @@ const Auxiliary = ({ icon: ComponentIcon = EditSOutline, fontSize = '24px', colo
     top: NaN,
   });
   const disabledScroll = useCallback((e: TouchEvent) => {
-    e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+    if (e.cancelable) {
+      e.preventDefault(); //阻止默认的处理方式(阻止下拉滑动的效果)
+    }
   }, []);
   const handleTouchStart = () => {
     const data = buttonRef.current?.getBoundingClientRect?.();
@@ -59,25 +61,36 @@ const Auxiliary = ({ icon: ComponentIcon = EditSOutline, fontSize = '24px', colo
       if (buttonRef.current && coordinate.current) {
         buttonRef.current.setAttribute(
           'style',
-          `transition:all 300ms cubic-bezier(0.36, 1, 0.58, 1);transform: translate(${isLeft ? 0 - coordinate.current.left : 0}px,${
-            (rect.top < 0 ? 0 : rect.top) - coordinate.current.top
-          }px)`,
+          `transition:all 300ms cubic-bezier(0.36, 1, 0.58, 1);
+          transform: translate(${isLeft ? 0 - coordinate.current.left : 0}px,${(rect.top < 0 ? 0 : rect.top) - coordinate.current.top}px)`,
         );
       }
     }
     document.body.removeAttribute('style');
   };
 
+  const offsetTabBar = useCallback(() => {
+    // TODO: 48 是底部的高度 后续替换
+    const height = window.innerHeight - getSafeButton() - coordinate.current.top - coordinate.current.height * 2 - 48;
+    return height;
+  }, []);
+  const buttonSafeArea = useCallback(
+    (offsetTop: number) => {
+      return offsetTabBar() - offsetTop;
+    },
+    [offsetTabBar],
+  );
+
   const handleTouchMove = (e: any) => {
     const coor = e.nativeEvent.changedTouches[0];
     if (buttonRef.current && coor && coordinate.current) {
       // pageX - scrollX = clientX
-
+      const offsetTop = coor.clientY - coordinate.current?.top - coordinate.current.height - (getSafeButton() ? getRootFontSize() * 3 : 0);
       buttonRef.current.setAttribute(
         'style',
         `transform: translate(${coor.clientX - coordinate.current?.left - coordinate.current.width}px,${
           // TODO: chrome 底部工具栏的高度为46px 如何判断是否弹出了底部的工具栏
-          coor.clientY - coordinate.current?.top - coordinate.current.height - (getSafeButton() ? getRootFontSize() * 3 : 0)
+          buttonSafeArea(offsetTop) <= 0 ? offsetTabBar() : offsetTop
         }px)`,
       );
     }
