@@ -13,6 +13,7 @@ export default defineConfig({
       component: '@/views/Layout/index',
       routes: [
         { path: '/task', component: '@/pages/task/index' },
+        { path: '/user', component: '@/pages/user/index' },
         { path: '/fetch', component: '@/pages/test/fetch' },
         // { path: '/', redirect: '/login' },
         // { path: '/login', component: '@/pages/home' },
