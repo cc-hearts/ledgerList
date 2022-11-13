@@ -14,7 +14,11 @@ export default defineConfig({
       routes: [
         { path: '/task', component: '@/pages/task/index' },
         { path: '/user', component: '@/pages/user/index' },
-        { path: '/fetch', component: '@/pages/test/fetch' },
+        {
+          path: '/sub',
+          component: '@/views/subLayout/index',
+          routes: [{ path: 'userChange', component: '@/pages/user/components/userChange', title: '用户信息' }],
+        },
         // { path: '/', redirect: '/login' },
         // { path: '/login', component: '@/pages/home' },
         // { path: '/test', component: '@/components/verification/verification' },

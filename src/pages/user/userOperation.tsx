@@ -1,6 +1,8 @@
 import Card from '@/components/card/index';
 import styled from 'styled-components';
 import { RightOutline } from 'antd-mobile-icons';
+import { useCallback } from 'react';
+import { history } from 'umi';
 const Container = styled.div`
   width: 90%;
   position: absolute;
@@ -27,19 +29,22 @@ const ListItem = styled.li`
   }
 `;
 const list = [
-  { icon: 'icon-bianji', title: '用户信息修改' },
+  { icon: 'icon-bianji', title: '用户信息修改', toRedirect: '/sub/userChange' },
   { icon: 'icon-anquanyanzheng', title: '重置密码' },
   { icon: 'icon-renwu', title: '关于我们' },
 ];
-const userOperation = () => {
+const OperationUser = () => {
+  const toPath = useCallback((pathname) => {
+    history.push(pathname);
+  }, []);
   return (
     <Container>
       <Card>
         <List>
           {list.map((val, index) => {
-            const { title, icon } = val;
+            const { title, icon, toRedirect } = val;
             return (
-              <ListItem key={index}>
+              <ListItem key={index} onClick={() => toPath(toRedirect)}>
                 <span className={`iconfont ${icon}`} style={{ fontSize: '24px' }}></span>
                 <span>{title}</span>
                 <RightOutline />
@@ -52,4 +57,4 @@ const userOperation = () => {
   );
 };
 
-export default userOperation;
+export default OperationUser;
