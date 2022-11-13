@@ -17,7 +17,8 @@ export function useUserInfo() {
     localStorage.removeItem('token');
     history.push('/login');
   }, []);
-  if (info === null) {
+
+  const getInfo = useCallback(() => {
     getUserInfo()
       .then((res) => {
         setUserInfo(res.data!);
@@ -26,7 +27,9 @@ export function useUserInfo() {
         console.warn(err);
         clearUserInfo();
       });
+  }, [clearUserInfo]);
+  if (info === null) {
+    getInfo();
   }
-
-  return [info, clearUserInfo] as const;
+  return [info, clearUserInfo, getInfo] as const;
 }
