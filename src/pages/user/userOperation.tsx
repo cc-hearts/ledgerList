@@ -1,7 +1,6 @@
 import Card from '@/components/card/index';
 import styled from 'styled-components';
 import { RightOutline } from 'antd-mobile-icons';
-
 const Container = styled.div`
   width: 90%;
   position: absolute;
@@ -32,7 +31,7 @@ const list = [
   { icon: 'icon-anquanyanzheng', title: '重置密码' },
   { icon: 'icon-renwu', title: '关于我们' },
 ];
-const UserInfo = () => {
+const userOperation = () => {
   return (
     <Container>
       <Card>
@@ -53,4 +52,4 @@ const UserInfo = () => {
   );
 };
 
-export default UserInfo;
+export default userOperation;

@@ -26,8 +26,10 @@ const Login = () => {
     if (!formsRef.current) return;
     setDisabled(true);
     const data = formsRef.current.getData();
+    let flag: boolean;
     (active ? loginUser : registerUser)({ ...data })
       .then((res) => {
+        flag = true;
         successTips(res.message);
         if (!res.data && active) {
           errorTips('登陆失败 token无法获取');
@@ -43,12 +45,13 @@ const Login = () => {
           const token = res?.data?.token;
           token && localStorage.setItem('token', token);
         }
-        setDisabled(false);
         history.push('/task');
       })
       .catch((e) => {
         catchErrorTip(e);
-        setDisabled(false);
+      })
+      .finally(() => {
+        !flag && setDisabled(false);
       });
   }, [active, changeActiveLogin]);
 

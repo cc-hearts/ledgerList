@@ -1,9 +1,13 @@
 import Background from './background';
-import UserInfo from './userInfo';
+import UserOperation from './userOperation';
+import LogoutButton from './logout';
+import User from './user';
 export default () => {
   return (
     <Background customStyle={{ position: 'relative' }}>
-      <UserInfo />
+      <User />
+      <UserOperation />
+      <LogoutButton />
     </Background>
   );
 };
