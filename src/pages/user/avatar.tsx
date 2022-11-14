@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { getImagePreviewPath } from '@/utils/oss';
 
 const AvatarComponent = styled.div`
   width: 4rem;
   height: 4rem;
   color: #fff;
-  background-color: #617ee0;
   padding: 0;
+
+  img {
+    width: 100%;
+  }
 
   span {
     display: flex;
@@ -15,6 +19,7 @@ const AvatarComponent = styled.div`
     font-size: 2rem;
     justify-content: center;
     align-items: center;
+    background-color: #617ee0;
   }
 `;
 interface Props {
@@ -22,9 +27,21 @@ interface Props {
   sign: string;
 }
 const Avatar: React.FC<Props> = ({ src, sign }) => {
+  const [avatarSrc, setAvatarSrc] = useState<string>('');
+  useEffect(() => {
+    if (src) {
+      const key = src.split('/')[1];
+      getImagePreviewPath(decodeURI(key)).then((path) => {
+        if (path) {
+          setAvatarSrc(path);
+        }
+      });
+    }
+  }, [src]);
+
   if (!sign) return <></>;
-  const avatar = sign.slice(0, 1);
-  return <AvatarComponent>{src ? <img src={src} alt="avatar" /> : <span>{avatar}</span>}</AvatarComponent>;
+  const avatar = avatarSrc ? null : sign.slice(0, 1);
+  return <AvatarComponent>{avatarSrc ? <img src={avatarSrc} alt="avatar" /> : <span>{avatar}</span>}</AvatarComponent>;
 };
 
-export default Avatar;
+export default memo(Avatar);

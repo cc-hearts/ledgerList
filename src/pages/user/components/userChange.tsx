@@ -1,5 +1,5 @@
 import { UserInfoContext } from '@/views/Layout';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { Input, Divider } from '@/components/antd-mobile/index';
 import FixedButton from '@/feature/components/button';
 import { updateUserInfo } from '../service';
@@ -7,6 +7,7 @@ import Avatar from '../avatar';
 import styled from 'styled-components';
 import { errorTips, successTips } from '@/utils/message';
 import { noop } from '@/lib/shard';
+import UploadButton from '@/components/upload/index';
 interface updateUser {
   id: number;
   mobile: string;
@@ -22,17 +23,7 @@ const Description = styled.div`
   padding-left: 2rem;
 `;
 
-const UploadButton = styled.button`
-  padding: 0.5rem 1rem;
-  text-align: center;
-  outline: none;
-  border: none;
-  color: #fff;
-  border-radius: 0.4rem;
-  background-color: #377df6;
-`;
-
-export default () => {
+const ChangeUser = () => {
   const context = useContext(UserInfoContext) || { info: null, getInfo: noop };
   const { info, getInfo } = context;
   const [data, setData] = useState<updateUser | null>(null);
@@ -52,6 +43,19 @@ export default () => {
     },
     [data],
   );
+
+  const handleSuccessFile = useCallback(
+    (val) => {
+      if (data) {
+        const { hash, key } = val;
+        const avatar = `${hash}/${encodeURI(key)}`;
+        Reflect.set(data, 'avatar', avatar);
+        setData({ ...data });
+      }
+    },
+    [data],
+  );
+
   const submit = useCallback(() => {
     // 保存
     console.log(data);
@@ -99,7 +103,7 @@ export default () => {
           <Avatar sign={data?.username || ''} src={data?.avatar} />
           <Description>
             <div>支持 jpg png jpeg 格式大小200KB 以内的图片</div>
-            <UploadButton>点击上传</UploadButton>
+            <UploadButton onSuccess={handleSuccessFile}>点击上传</UploadButton>
           </Description>
         </div>
         <Divider />
@@ -108,3 +112,4 @@ export default () => {
     </>
   );
 };
+export default memo(ChangeUser);

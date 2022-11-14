@@ -35,7 +35,7 @@ const User = () => {
       <>
         {info ? (
           <Wrapper>
-            <Avatar sign={(info.username as string) || ''} src={(info.src as string) || ''} />
+            <Avatar sign={(info.username as string) || ''} src={(info.avatar as string) || ''} />
             <UserWrapper>
               <div>
                 <span>昵称：</span>
