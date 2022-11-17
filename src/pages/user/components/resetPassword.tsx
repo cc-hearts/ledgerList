@@ -1,15 +1,19 @@
-import { Form, Input } from '@/components/antd-mobile/index';
-import FixedButton from '@/feature/components/button';
-import { successTips } from '@/utils/message';
-import type { FormInstance } from 'antd-mobile/es/components/form/form';
-import { useCallback, useRef, useState } from 'react';
-import { history } from 'umi';
-import { changeUpdate } from '../service';
 /**
  * @author cc-heart
  * @description 重置密码
  * @Date 2022-11-16
  */
+import { Form, Input } from '@/components/antd-mobile/index';
+import FixedButton from '@/feature/components/button';
+import { successTips } from '@/utils/message';
+import type { FormInstance } from 'antd-mobile/es/components/form/form';
+import { useCallback, useRef, useState } from 'react';
+import styled from 'styled-components';
+import { history } from 'umi';
+import { changeUpdate } from '../service';
+const Wrapper = styled.div`
+  padding: 4rem 1rem;
+`;
 const ResetPassword = () => {
   const form = useRef<FormInstance>(null);
   const [load, setLoad] = useState(false);
@@ -40,13 +44,13 @@ const ResetPassword = () => {
     callback();
   }, []);
   return (
-    <>
+    <Wrapper>
       <Form ref={form}>
         <Form.Item name="password" label="旧密码" rules={[{ required: true }]}>
-          <Input placeholder="请填写旧密码" />
+          <Input placeholder="请填写旧密码" type={'password'} />
         </Form.Item>
         <Form.Item name="newPassword" label="新密码" rules={[{ required: true }]}>
-          <Input placeholder="请填写新密码" />
+          <Input placeholder="请填写新密码" type={'password'} />
         </Form.Item>
         <Form.Item
           name="reNewPassword"
@@ -58,11 +62,11 @@ const ResetPassword = () => {
             },
           ]}
         >
-          <Input placeholder="请再次填写新密码" />
+          <Input placeholder="请再次填写新密码" type={'password'} />
         </Form.Item>
       </Form>
       <FixedButton text={'保存'} color="primary" onClick={submit} load={load} />
-    </>
+    </Wrapper>
   );
 };
 export default ResetPassword;
