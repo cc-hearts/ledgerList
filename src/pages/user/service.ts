@@ -7,3 +7,7 @@ export function logout() {
 export function updateUserInfo<T extends params>(params: T) {
   return Post('api/user/updateUserInfo', params);
 }
+
+export function changeUpdate<T extends params>(params: T) {
+  return Post('api/user/modifyPassword', params);
+}

@@ -17,7 +17,10 @@ export default defineConfig({
         {
           path: '/sub',
           component: '@/views/subLayout/index',
-          routes: [{ path: 'userChange', component: '@/pages/user/components/userChange', title: '用户信息' }],
+          routes: [
+            { path: 'userChange', component: '@/pages/user/components/userChange', title: '用户信息' },
+            { path: 'modifyPassword', component: '@/pages/user/components/resetPassword', title: '修改密码' },
+          ],
         },
         // { path: '/', redirect: '/login' },
         // { path: '/login', component: '@/pages/home' },

@@ -30,7 +30,7 @@ const ListItem = styled.li`
 `;
 const list = [
   { icon: 'icon-bianji', title: '用户信息修改', toRedirect: '/sub/userChange' },
-  { icon: 'icon-anquanyanzheng', title: '重置密码' },
+  { icon: 'icon-anquanyanzheng', title: '重置密码', toRedirect: '/sub/modifyPassword' },
   { icon: 'icon-renwu', title: '关于我们' },
 ];
 const OperationUser = () => {
