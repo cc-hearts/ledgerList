@@ -28,7 +28,7 @@ npm start
 
 ## Maintainers
 
-[heart](https://github.com/Hearpro)
+[heart](https://github.com/cc-hearts)
 
 ## License
 
