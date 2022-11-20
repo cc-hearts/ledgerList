@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { errorTips, successTips } from '@/utils/message';
 import { noop } from '@/lib/shard';
 import UploadButton from '@/components/upload/index';
+import '@/assets/scss/avatar/index.scss';
 interface updateUser {
   id: number;
   mobile: string;
@@ -94,12 +95,7 @@ const ChangeUser = () => {
         <Input placeholder="请填写手机号码" value={data?.mobile || ''} onChange={(e) => handleChangeInput(e, 'mobile')} />
         <Divider />
         <h2>头像</h2>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
+        <div className="avatar">
           <Avatar sign={data?.username || ''} src={data?.avatar} />
           <Description>
             <div>支持 jpg png jpeg 格式大小200KB 以内的图片</div>
