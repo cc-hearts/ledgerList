@@ -13,3 +13,7 @@ export function getUploadToken() {
 export function getPreviewPath<T extends params>(params: T) {
   return Post<{ path: string }>('api/user/getFilePath', params);
 }
+
+export function getUserInfo() {
+  return Get('api/user/getUserInfo');
+}

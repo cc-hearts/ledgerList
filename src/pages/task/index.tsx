@@ -1,9 +1,9 @@
 import Auxiliary from '@/components/auxi';
 import { Popup } from '@/components/antd-mobile';
 import { useCallback, useRef, useState } from 'react';
-import TaskOperation from './taskOperation';
-import List from './list';
-import type { getDataRef, formRef } from './types';
+import TaskOperation from './components/taskOperation';
+import List from './components/list';
+import type { getDataRef, formRef } from '@/types/types';
 
 export default () => {
   const [visible, setVisible] = useState(false);

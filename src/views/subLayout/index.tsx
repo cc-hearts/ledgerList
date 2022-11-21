@@ -4,7 +4,7 @@
  * @Date 2022-11-13
  */
 import React from 'react';
-import TopBar from './topBar';
+import TopBar from './components/topBar';
 interface route {
   title: string;
   path: string;

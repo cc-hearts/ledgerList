@@ -1,7 +1,7 @@
-import Background from './background';
-import UserOperation from './userOperation';
-import LogoutButton from './logout';
-import User from './user';
+import Background from './components/background';
+import UserOperation from './components/userOperation';
+import LogoutButton from './components/logout';
+import User from './components/user';
 export default () => {
   return (
     <Background customStyle={{ position: 'relative' }}>

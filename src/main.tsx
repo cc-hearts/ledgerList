@@ -1,14 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
+import '@/assets/scss/base.scss';
+import '@/assets/font/iconfont.css';
 
-const Container = styled.div``;
+import type { ChildrenProps } from '@/types/types';
 
-interface props {
-  children?: React.ReactNode;
-}
-
-const App: React.FC<props> = function (props) {
-  return <Container>{props.children}</Container>;
+const App: React.FC<ChildrenProps> = function (props) {
+  return <>{props.children}</>;
 };
-
 export default App;

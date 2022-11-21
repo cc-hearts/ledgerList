@@ -1,12 +1,10 @@
-import TabBar from '@/components/tabBar';
-import { tabBar } from './constants';
-import { useGuard, useUserInfo } from './guard';
-import './layout.css';
-import '../../assets/font/iconfont.css';
 import React from 'react';
-interface Props {
-  children?: React.ReactNode;
-}
+import TabBar from '@/components/tabBar';
+import { LayoutConstants } from '@/constants/index';
+import { useGuard, useUserInfo } from '@/hooks/index';
+import type { ChildrenProps } from '@/types/types';
+
+const { tabBar } = LayoutConstants;
 
 export const UserInfoContext = React.createContext<{
   info: Record<string, unknown> | null;
@@ -14,9 +12,10 @@ export const UserInfoContext = React.createContext<{
   getInfo: (() => void) | null;
 } | null>(null);
 
-export const LayoutIndex: React.FC<Props> = ({ children }) => {
+export const LayoutIndex: React.FC<ChildrenProps> = ({ children }) => {
   useGuard();
   const [info, clearUserInfo, getInfo] = useUserInfo();
+  console.log(children);
   return (
     <UserInfoContext.Provider value={{ info, clearUserInfo, getInfo }}>
       {children}
