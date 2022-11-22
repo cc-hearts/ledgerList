@@ -19,7 +19,7 @@ export default function useUserInfo() {
         clearUserInfo();
       });
   }, [clearUserInfo]);
-  if (info === null) {
+  if (info === null && localStorage.getItem('token') !== null) {
     getInfo();
   }
   return [info, clearUserInfo, getInfo] as const;

@@ -1,4 +1,4 @@
-import { UserInfoContext } from '@/views/Layout';
+import { UserInfoContext } from '@/main';
 import { memo, useCallback, useContext, useEffect, useState } from 'react';
 import { Input, Divider } from '@/components/antd-mobile/index';
 import FixedButton from '@/feature/components/button';

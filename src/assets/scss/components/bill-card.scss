@@ -1,0 +1,36 @@
+@mixin padding-main {
+  padding: 1.2rem;
+}
+.bill-card {
+  border-radius: 0.5rem;
+  box-shadow: 0 0px 5px var(--box-shadow-1);
+  &__title {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 0.2rem;
+    font-size: 1.3rem;
+    background-color: #f9f9f9;
+    font-weight: 600;
+  }
+
+  &__content {
+    &--main {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      @include padding-main();
+    }
+
+    &--date {
+      padding: 0 1.2rem 1rem;
+    }
+
+    &__wrapper {
+      &:not(:last-child) {
+        & > div:last-child {
+          border-bottom: 1px solid var(--border-1);
+        }
+      }
+    }
+  }
+}

@@ -37,10 +37,15 @@
   --box-shadow-1: rgba(0, 0, 0, 0.2);
   --box-shadow-2: rgba(0, 0, 0, 0.3);
   --box-shadow-3: rgba(0, 0, 0, 0.4);
+
+  --border-1: #eee;
+
+  --color: #fff;
 }
 
 #root {
   /* 1rem === 16px */
+  height: 100vh;
   padding-bottom: calc(4rem + constant(safe-area-inset-bottom));
   padding-bottom: calc(4rem + env(safe-area-inset-bottom));
 }

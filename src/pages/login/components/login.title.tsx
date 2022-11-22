@@ -5,7 +5,7 @@ import { memo } from 'react';
 const Tab = styled.div`
   color: ${primaryColor};
   padding: 0 2rem;
-  margin: 1rem 0;
+  margin: 3rem 0 1rem;
   & span {
     margin: 0 0.8rem 0 0;
   }
@@ -36,7 +36,6 @@ const TabComponent: React.FC<Props> = ({ changeActive, active }) => {
     if (bool === active) return;
     changeActive(!bool);
   };
-  console.log('login.title.tsx');
   return (
     <Tab>
       {tabList.current.map((tabs) => {

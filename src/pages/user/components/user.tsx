@@ -1,4 +1,4 @@
-import { UserInfoContext } from '@/views/Layout';
+import { UserInfoContext } from '@/main';
 import { useContext } from 'react';
 import Avatar from './avatar';
 import '@/assets/scss/user/user.scss';

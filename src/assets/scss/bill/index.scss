@@ -1,6 +1,8 @@
-.bill-header {
-  height: 4rem;
-  position: fixed;
-  top: 0;
-  background-color: var(--primary-color-8);
+.bill-container {
+  margin-top: 6rem;
+  padding: .5rem;;
+  &__title {
+    display: flex;
+    justify-content: space-between;
+  }
 }

@@ -7,4 +7,7 @@ export default function useGuard() {
   if (!token && pathname !== '/login') {
     history.push('/login');
   }
+  if (token && pathname === '/') {
+    history.push('/main/task');
+  }
 }
