@@ -9,7 +9,16 @@ const BillCard = ({ date }: { date: string }) => {
     <div className="bill-card">
       <div className="bill-card__title">
         <div>{date}</div>
-        <div></div>
+        <div>
+          <span>
+            <i className="iconfont icon-xinzengshoukuan"></i>
+            <span>¥11200</span>
+          </span>
+          <span>
+            <i className="iconfont icon-zhichu"></i>
+            <span>¥33000</span>
+          </span>
+        </div>
       </div>
       <div className="bill-card__content">
         {info.map((val) => {

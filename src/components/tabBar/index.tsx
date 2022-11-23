@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import styled from 'styled-components';
 import { useHistory, useLocation } from 'umi';
 interface Props {
-  tabBarItem: Array<{ name: string; path: string; icon: React.FC<any>; callback?: (...args: any[]) => void }>;
+  tabBarItem: Array<{ name: string; path: string; icon: string; callback?: (...args: any[]) => void }>;
 }
 const Tab = styled.ul`
   position: fixed;
@@ -44,11 +44,11 @@ const TabBar: React.FC<Props> = ({ tabBarItem }) => {
   return (
     <Tab>
       {tabBarItem.map((val) => {
-        const { icon: ComponentsIcon } = val;
+        const { icon } = val;
         return (
           <TabItem key={val.path} className={location.pathname === val.path ? 'tab-active' : ''} onClick={() => toggleTabBar(val.path)}>
             <div>
-              <ComponentsIcon />
+              <i className={icon}></i>
             </div>
             <div>{val.name}</div>
           </TabItem>

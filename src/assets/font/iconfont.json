@@ -6,6 +6,20 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "5344985",
+      "name": "支出",
+      "font_class": "zhichu",
+      "unicode": "e688",
+      "unicode_decimal": 59016
+    },
+    {
+      "icon_id": "9393447",
+      "name": "新增收款",
+      "font_class": "xinzengshoukuan",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
       "icon_id": "24472967",
       "name": "任务",
       "font_class": "renwu",
