@@ -23,7 +23,7 @@ const BillCard = ({ date }: { date: string }) => {
       <div className="bill-card__content">
         {info.map((val) => {
           return (
-            <div className="bill-card__content__wrapper">
+            <div key={val.date} className="bill-card__content__wrapper">
               <div className="bill-card__content--main">
                 <div>{val.label}</div>
                 <div>{val.count}</div>

@@ -6,9 +6,11 @@ const BillContainer = () => {
 
   return (
     <div className="bill-container">
-      {date.map((val) => {
-        return <BillCard key={val.date} date={val.date} />;
-      })}
+      <div>
+        {date.map((val) => {
+          return <BillCard key={val.date} date={val.date} />;
+        })}
+      </div>
     </div>
   );
 };

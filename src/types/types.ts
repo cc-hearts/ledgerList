@@ -10,3 +10,21 @@ export interface MobileFieldProps<T> {
 export type getDataRef = { getData: () => void };
 
 export type formRef = { setFieldsValue: (...args: any[]) => void; setType: (...args: any[]) => void };
+
+export interface dictMap {
+  dictKey: string;
+
+  dictValue: string;
+
+  dictName: string;
+
+  status: number;
+
+  id: number;
+
+  isDelete: number;
+
+  createTime: string;
+
+  updateTime: string;
+}

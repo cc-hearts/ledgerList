@@ -4,6 +4,7 @@
  * @Date 2022-11-14
  */
 
+import type { dictMap } from '@/types/types';
 import { Get, Post } from '../utils/request';
 
 export function getUploadToken() {
@@ -16,4 +17,8 @@ export function getPreviewPath<T extends params>(params: T) {
 
 export function getUserInfo() {
   return Get('api/user/getUserInfo');
+}
+
+export function getDictMap(dictKey: string) {
+  return Get<Array<dictMap>>(`api/dict/getDict?dictKey=${dictKey}`);
 }

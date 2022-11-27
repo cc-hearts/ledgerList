@@ -9,3 +9,4 @@ export { default as JumboTab } from './jumbTabs/index';
 export { default as Calendar } from './calendar/index';
 export { default as Selector } from './selector/index';
 export { default as Divider } from './divider/index';
+export { default as DatePicker } from './datePicker/index';

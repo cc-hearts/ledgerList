@@ -1,8 +1,11 @@
 .bill-container {
-  margin-top: 6rem;
-  padding: .5rem;;
-  &__title {
-    display: flex;
-    justify-content: space-between;
+  border-top: 1px solid transparent;
+  & > div {
+    margin-top: calc(6rem - 1px);
+    padding: 0.5rem;
+    &__title {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
