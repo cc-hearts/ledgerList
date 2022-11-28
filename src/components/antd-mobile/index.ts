@@ -10,3 +10,5 @@ export { default as Calendar } from './calendar/index';
 export { default as Selector } from './selector/index';
 export { default as Divider } from './divider/index';
 export { default as DatePicker } from './datePicker/index';
+export { default as NumberKeyboard } from './numberKeyboard/index';
+export { default as TextArea } from './textArea/index';

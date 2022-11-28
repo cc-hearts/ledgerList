@@ -28,6 +28,11 @@ const PopupButton = ({
         case 'month':
           date = new Date(val).toISOString().split('T')[0].split('-').slice(0, -1).join('-');
           break;
+        case 'day':
+          date = new Date(val);
+          date.setHours(date.getHours() + 8);
+          date = date.toISOString().split('T')[0];
+          break;
       }
       changeLabel(date);
     },
