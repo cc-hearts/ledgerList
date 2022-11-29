@@ -14,9 +14,6 @@ const BillContainer = ({ handleRef }: { handleRef: RefObject<{ initGetData: (...
         const { list, total } = res.data;
         activeTotal.current += total;
         const dataSource = list.reduce((acc, cur) => {
-          const date = new Date(cur.date);
-          date.setHours(date.getHours() + 8);
-          cur.date = date.toISOString().split('T')[0];
           if (!(cur.date in acc)) {
             acc[cur.date] = [];
           }
