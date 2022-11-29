@@ -38,7 +38,9 @@
     &--date {
       padding: 0 1.2rem 1rem;
     }
-
+    &--remark {
+      padding: 0 1.2rem 0.5rem;
+    }
     &__wrapper {
       &:not(:last-child) {
         & > div:last-child {

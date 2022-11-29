@@ -22,6 +22,8 @@ export interface dictMap {
 
   id: number;
 
+  remark: string;
+
   isDelete: number;
 
   createTime: string;

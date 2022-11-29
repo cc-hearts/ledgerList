@@ -1,10 +1,22 @@
 import '@/assets/scss/components/bill-card.scss';
+import { memo, useMemo } from 'react';
 
-const info = [
-  { label: '转账', count: 446, date: '09:13' },
-  { label: '咋去', count: 324, date: '89:13' },
-];
-const BillCard = ({ date }: { date: string }) => {
+const BillCard = ({ date, info }: { date: string; info: any[] }) => {
+  const { expenditure, income } = useMemo(() => {
+    return info.reduce(
+      (acc, cur) => {
+        if (acc[cur.consumptionType] === void 0) {
+          acc[cur.consumptionType] = 0;
+        }
+        acc[cur.consumptionType] += Number(cur.amount);
+        return acc;
+      },
+      {
+        expenditure: 0,
+        income: 0,
+      },
+    );
+  }, [info]);
   return (
     <div className="bill-card">
       <div className="bill-card__title">
@@ -12,22 +24,23 @@ const BillCard = ({ date }: { date: string }) => {
         <div>
           <span>
             <i className="iconfont icon-xinzengshoukuan"></i>
-            <span>¥11200</span>
+            <span>{income}</span>
           </span>
           <span>
             <i className="iconfont icon-zhichu"></i>
-            <span>¥33000</span>
+            <span>{expenditure}</span>
           </span>
         </div>
       </div>
       <div className="bill-card__content">
         {info.map((val) => {
           return (
-            <div key={val.date} className="bill-card__content__wrapper">
+            <div key={val.id} className="bill-card__content__wrapper">
               <div className="bill-card__content--main">
-                <div>{val.label}</div>
-                <div>{val.count}</div>
+                <div>{val.consumptionName}</div>
+                <div>{val.amount}</div>
               </div>
+              {val.remark ? <div className="bill-card__content--remark">{val.remark}</div> : null}
               <div className="bill-card__content--date">{val.date}</div>
             </div>
           );
@@ -37,4 +50,4 @@ const BillCard = ({ date }: { date: string }) => {
   );
 };
 
-export default BillCard;
+export default memo(BillCard);
