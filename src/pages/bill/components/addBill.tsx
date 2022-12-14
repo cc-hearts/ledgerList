@@ -7,6 +7,7 @@ import '@/assets/scss/bill/addBill.scss';
 import { getDictMap } from '@/api';
 import type { dictMap } from '@/types/types';
 import { addBill } from '@/api/bill';
+// 添加字典缓存项
 const AddBillModal = ({ refreshContainer }: { refreshContainer: () => void }) => {
   const [visible, setVisible] = useState(false);
   const [date, setDate] = useState(new Date().toISOString().split('T')[0]);

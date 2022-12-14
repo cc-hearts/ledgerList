@@ -28,7 +28,7 @@ export default defineConfig({
               ],
             },
             { path: 'bill', component: '@/pages/bill/index' },
-
+            { path: 'collect', component: '@/pages/collect/index' },
             { path: '*', component: '@/pages/404' },
           ],
         },
