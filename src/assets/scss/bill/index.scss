@@ -1,8 +1,11 @@
 .bill-container {
+  margin-top: calc(6rem - 1px);
   border-top: 1px solid transparent;
   & > div {
-    margin-top: calc(6rem - 1px);
     padding: 0.5rem;
+    &:not(:first-child) {
+      margin-top: 2rem;
+    }
     &__title {
       display: flex;
       justify-content: space-between;

@@ -15,7 +15,7 @@ const Tab = styled.ul`
   padding-inline-start: 0;
   display: flex;
   font-size: 1rem;
-  height: 3rem;
+  height: 4rem;
   background-color: var(--primary-tab-bar-color, #fff);
   padding-bottom: constant(safe-area-inset-bottom);
   padding-bottom: env(safe-area-inset-bottom);
@@ -27,6 +27,9 @@ const TabItem = styled.li`
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  i {
+    font-size: 1.5rem;
+  }
   &.tab-active {
     color: var(--primary-color, #8cb8f6);
   }

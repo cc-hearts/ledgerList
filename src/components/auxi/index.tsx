@@ -71,7 +71,7 @@ const Auxiliary = ({ icon: ComponentIcon = EditSOutline, fontSize = '24px', colo
 
   const offsetTabBar = useCallback(() => {
     // TODO: 48 是底部的高度 后续替换
-    const height = window.innerHeight - getSafeButton() - coordinate.current.top - coordinate.current.height * 2 - 48;
+    const height = window.innerHeight - getSafeButton() - coordinate.current.top - coordinate.current.height * 2 - 56;
     return height;
   }, []);
   const buttonSafeArea = useCallback(

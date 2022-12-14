@@ -55,3 +55,31 @@
     }
   }
 }
+
+.amount-list {
+  display: flex;
+  align-items: center;
+  & > div:first-child {
+    width: 8rem;
+    display: flex;
+    align-items: center;
+
+    i {
+      font-size: 2rem;
+      margin-right: 0.5rem;
+    }
+    span {
+      flex-shrink: 0;
+    }
+    span:last-child {
+      flex: 1;
+      margin-left: 0.5rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  &__process-bar {
+    flex: 1;
+  }
+}

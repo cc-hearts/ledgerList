@@ -127,7 +127,9 @@ const AddBillModal = ({ refreshContainer }: { refreshContainer: () => void }) =>
         <Divider />
         <JumboTab activeKey={capitalFlowsActive} onChange={handleCapitalFlowsActive}>
           {capitalFlows.map((val) => {
-            return <JumboTab.Tab key={val.dictValue} title={<i className={val.remark}></i>} description={<span>{val.dictName}</span>} />;
+            return (
+              <JumboTab.Tab key={val.dictValue} title={<i className={`iconfont ${val.remark}`}></i>} description={<span>{val.dictName}</span>} />
+            );
           })}
         </JumboTab>
         <div className="add-bill-remark">

@@ -36,11 +36,16 @@ const BillCard = ({ date, info }: { date: string; info: any[] }) => {
         {info.map((val) => {
           return (
             <div key={val.id} className="bill-card__content__wrapper">
-              <div className="bill-card__content--main">
-                <div>{val.consumptionName}</div>
-                <div>{val.amount}</div>
+              <div>
+                <i className={`iconfont ${val.icon}`}></i>
+                <div>
+                  <div className="bill-card__content--main">
+                    <div>{val.consumptionName}</div>
+                    <div>{val.amount}</div>
+                  </div>
+                  {val.remark ? <div className="bill-card__content--remark">{val.remark}</div> : null}
+                </div>
               </div>
-              {val.remark ? <div className="bill-card__content--remark">{val.remark}</div> : null}
               <div className="bill-card__content--date">{val.date}</div>
             </div>
           );
